@@ -18,28 +18,26 @@ across the board.
 npx provides some drop-in functions for those; mostly they are thin wrappers around
 native numpy functions.
 
-* `npx.dot(a, b)`
+##### `npx.dot(a, b)`
 
-  `numpy.dot(a, b)` forms the dot product between the last axis of `a` and the
-  second-last (?) axis of `b`.
+Forms the dot product between the last axis of `a` and the _first_ axis of `b`.
 
-  `npx.dot` forms the dot product between the last axis of `a` and the _first_ axis of
-  `b`.
+(Not the second-last axis of `b` as `numpy.dot(a, b)`.)
 
-* `npx.solve(A, b)`
+##### `npx.solve(A, b)`
 
-  Solves a linear equation system with a matrix of shape `(n, n)` and an array of
-  shape `(n, ...)`. The output has the same shape as the second argument. Uses
-  `numpy.linalg.solve` internally.
+Solves a linear equation system with a matrix of shape `(n, n)` and an array of shape
+`(n, ...)`. The output has the same shape as the second argument. Uses
+`numpy.linalg.solve` internally.
 
 
-* `npx.add_at(a, idx, minlength: int)`
-  Return an array with entries of `a` summed up at indices `idx` with a minumum length
-  of `minlength`. `idx` can have any shape as long as it's matching `a`. The output
-  shape is `(minlength,...)`.
+##### `npx.add_at(a, idx, minlength: int)`
+Return an array with entries of `a` summed up at indices `idx` with a minumum length of
+`minlength`. `idx` can have any shape as long as it's matching `a`. The output shape is
+`(minlength,...)`.
 
-  The numpy equivalent is `numpy.add.at` [which is _much_
-  slower](https://github.com/numpy/numpy/issues/11156).
+The numpy equivalent is `numpy.add.at` [which is _much_
+slower](https://github.com/numpy/numpy/issues/11156).
 
 ### License
 npx is published under the [MIT license](https://en.wikipedia.org/wiki/MIT_License).
