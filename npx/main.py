@@ -1,4 +1,5 @@
 import math
+
 import numpy as np
 
 
@@ -21,12 +22,15 @@ def solve(A, x):
 
 def sum_at(a, idx, minlength: int):
     """A fancy (and correct) way of summing up vals into an array of out_shape according
-    to idx. np.add.at is thought out for this, but is really slow. np.bincount is a lot
-    faster (https://github.com/numpy/numpy/issues/5922#issuecomment-511477435), but
-    doesn't handle dimensionality. This function does.
+    to `idx`. `np.add.at` is thought out for this, but is really slow. `np.bincount` is
+    a lot faster (https://github.com/numpy/numpy/issues/5922#issuecomment-511477435),
+    but doesn't handle dimensionality. This function does.
 
-    vals has to have shape (idx.shape, ...),
+    `a` has to have shape `(*idx.shape, ...)`,
     """
+    a = np.asarray(a)
+    idx = np.asarray(idx)
+
     assert len(a.shape) >= len(idx.shape)
     m = len(idx.shape)
     assert idx.shape == a.shape[:m]

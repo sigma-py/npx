@@ -1,7 +1,9 @@
 from .__about__ import __version__
-from .main import add_at
+from .main import dot, solve, sum_at
 
 __all__ = [
     "__version__",
-    "add_at",
+    "dot",
+    "solve",
+    "sum_at",
 ]
