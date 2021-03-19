@@ -61,3 +61,8 @@ def add_at(a, indices, b):
     m = len(indices.shape)
     assert a.shape[1:] == b.shape[m:]
     a += sum_at(b, indices, a.shape[0])
+
+
+def subtract_at(a, indices, b):
+    b = np.asarray(b)
+    add_at(a, indices, -b)

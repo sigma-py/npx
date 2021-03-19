@@ -38,3 +38,14 @@ def test_add_at():
     tol = 1.0e-13
     ref = np.array([4.0, 2.0])
     assert np.all(np.abs(out - ref) < (1 + np.abs(ref)) * tol)
+
+
+def test_subtract_at():
+    a = [1.0, 2.0, 3.0]
+    idx = [0, 1, 0]
+    out = np.ones(2)
+    npx.subtract_at(out, idx, a)
+
+    tol = 1.0e-13
+    ref = np.array([-3.0, -1.0])
+    assert np.all(np.abs(out - ref) < (1 + np.abs(ref)) * tol)
