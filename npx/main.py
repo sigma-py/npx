@@ -19,7 +19,7 @@ def solve(A, x):
     return np.linalg.solve(A, x.reshape(x.shape[0], -1)).reshape(x.shape)
 
 
-def add_at(a, idx, minlength: int):
+def sum_at(a, idx, minlength: int):
     """A fancy (and correct) way of summing up vals into an array of out_shape according
     to idx. np.add.at is thought out for this, but is really slow. np.bincount is a lot
     faster (https://github.com/numpy/numpy/issues/5922#issuecomment-511477435), but
