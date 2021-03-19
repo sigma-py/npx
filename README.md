@@ -33,7 +33,8 @@ native numpy functions.
   `numpy.linalg.solve` internally.
 
 * ```python
-  npx.sum_at(a, idx, minlength: int)
+  npx.sum_at(a, idx, minlength: int = 0)
+  npx.add_at(out, idx, a)
   ```
   Returns an array with entries of `a` summed up at indices `idx` with a minumum length
   of `minlength`. `idx` can have any shape as long as it's matching `a`. The output

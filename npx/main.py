@@ -20,29 +20,44 @@ def solve(A, x):
     return np.linalg.solve(A, x.reshape(x.shape[0], -1)).reshape(x.shape)
 
 
-def sum_at(a, idx, minlength: int):
-    """A fancy (and correct) way of summing up vals into an array of out_shape according
-    to `idx`. `np.add.at` is thought out for this, but is really slow. `np.bincount` is
-    a lot faster (https://github.com/numpy/numpy/issues/5922#issuecomment-511477435),
-    but doesn't handle dimensionality. This function does.
+def sum_at(a, indices, minlength: int):
+    """Sums up values `a` with `indices` into an output array of at least length
+    `minlength` while treating dimensionality correctly. It's a lot faster than numpy's
+    own np.add.at (see
+    https://github.com/numpy/numpy/issues/5922#issuecomment-511477435).
 
-    `a` has to have shape `(*idx.shape, ...)`,
+    Typically, `indices` will be a one-dimensional array; `a` can have any
+    dimensionality. In this case, the output array will have shape (minlength,
+    a.shape[1:]).
+
+    `indices` may have arbitrary shape, too, but then `a` has to start out the same.
+    (Those dimensions are flattened out in the computation.)
     """
     a = np.asarray(a)
-    idx = np.asarray(idx)
+    indices = np.asarray(indices)
 
-    assert len(a.shape) >= len(idx.shape)
-    m = len(idx.shape)
-    assert idx.shape == a.shape[:m]
+    assert len(a.shape) >= len(indices.shape)
+    m = len(indices.shape)
+    assert indices.shape == a.shape[:m]
 
     out_shape = (minlength, *a.shape[m:])
 
-    idx = idx.reshape(-1)
+    indices = indices.reshape(-1)
     a = a.reshape(math.prod(a.shape[:m]), math.prod(a.shape[m:]))
 
     return np.array(
         [
-            np.bincount(idx, weights=a[:, k], minlength=minlength)
+            np.bincount(indices, weights=a[:, k], minlength=minlength)
             for k in range(a.shape[1])
         ]
     ).T.reshape(out_shape)
+
+
+def add_at(a, indices, b):
+    a = np.asarray(a)
+    indices = np.asarray(indices)
+    b = np.asarray(b)
+
+    m = len(indices.shape)
+    assert a.shape[1:] == b.shape[m:]
+    a += sum_at(b, indices, a.shape[0])
