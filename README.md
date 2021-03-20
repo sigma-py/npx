@@ -40,8 +40,12 @@ native numpy functions.
   of `minlength`. `idx` can have any shape as long as it's matching `a`. The output
   shape is `(minlength,...)`.
 
-  The numpy equivalent is `numpy.add.at` [which is _much_
-  slower](https://github.com/numpy/numpy/issues/11156).
+  The numpy equivalent `numpy.add.at` is _much_
+  slower:
+
+  <img alt="memory usage" src="https://nschloe.github.io/npx/perf-add-at.svg" width="50%">
+
+  (See also [this numpy bug](https://github.com/numpy/numpy/issues/11156).)
 
 ### License
 npx is published under the [MIT license](https://en.wikipedia.org/wiki/MIT_License).
