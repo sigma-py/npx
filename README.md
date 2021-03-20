@@ -10,13 +10,13 @@
 [![LGTM](https://img.shields.io/lgtm/grade/python/github/nschloe/npx.svg?style=flat-square)](https://lgtm.com/projects/g/nschloe/npx)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 
-[NumPy](https://numpy.org/) is a huge library of with useful method for scientific
-computing. The API of some methods is arguably confusing, but can't be changed without
-breaking backwards compatibility. Some methods can be improved, but it's hard to do so
-across the board.
+[NumPy](https://numpy.org/) is a large library used everywhere in scientific computing.
+That's why breaking backwards-compatibility is comes as a significant cost and is almost
+always avoided, even if the API of some methods is arguably confusing. This package
+provides drop-in wrappers "fixing" those.
 
-npx provides some drop-in functions for those; mostly they are thin wrappers around
-native numpy functions.
+If you have a fix for a NumPy method that can't go upstream for some reason, feel free
+to PR here.
 
 * ```python
   npx.dot(a, b)
@@ -29,8 +29,7 @@ native numpy functions.
   npx.solve(A, b)
   ```
   Solves a linear equation system with a matrix of shape `(n, n)` and an array of shape
-  `(n, ...)`. The output has the same shape as the second argument. Uses
-  `numpy.linalg.solve` internally.
+  `(n, ...)`. The output has the same shape as the second argument.
 
 * ```python
   npx.sum_at(a, idx, minlength: int = 0)
