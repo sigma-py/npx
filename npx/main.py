@@ -1,6 +1,12 @@
-import math
+from operator import mul
+from functools import reduce
 
 import numpy as np
+
+# math.prod in 3.8
+# https://docs.python.org/3/library/math.html#math.prod
+def _prod(a):
+    return reduce(mul, a, 1)
 
 
 def dot(a, b):
@@ -43,7 +49,7 @@ def sum_at(a, indices, minlength: int):
     out_shape = (minlength, *a.shape[m:])
 
     indices = indices.reshape(-1)
-    a = a.reshape(math.prod(a.shape[:m]), math.prod(a.shape[m:]))
+    a = a.reshape(_prod(a.shape[:m]), _prod(a.shape[m:]))
 
     return np.array(
         [
