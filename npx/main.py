@@ -1,7 +1,8 @@
-from operator import mul
 from functools import reduce
+from operator import mul
 
 import numpy as np
+
 
 # math.prod in 3.8
 # https://docs.python.org/3/library/math.html#math.prod

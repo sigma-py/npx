@@ -1,6 +1,7 @@
 import numpy as np
-import npx
 import perfplot
+
+import npx
 
 np.random.seed(0)
 
