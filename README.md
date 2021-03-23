@@ -49,8 +49,8 @@ to PR here.
 * ```python
   npx.unique_rows(a, return_inverse=False, return_counts=False)
   ```
-  Returns the unique rows of the array `a`. The numpy alternative `np.unique(a, axis=0)`
-  [is slow](https://github.com/numpy/numpy/issues/11136).
+  Returns the unique rows of the integer array `a`. The numpy alternative `np.unique(a,
+  axis=0)` [is slow](https://github.com/numpy/numpy/issues/11136).
 
 ### License
 npx is published under the [MIT license](https://en.wikipedia.org/wiki/MIT_License).

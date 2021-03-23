@@ -84,6 +84,9 @@ def unique_rows(a, return_inverse=False, return_counts=False):
     # The numpy alternative `np.unique(a, axis=0)` is slow; cf.
     # <https://github.com/numpy/numpy/issues/11136>.
     a = np.asarray(a)
+    if not np.issubdtype(a.dtype, np.integer):
+        raise ValueError(f"Input array must be integer type, got {a.dtype}.")
+
     b = np.ascontiguousarray(a).view(np.dtype((np.void, a.dtype.itemsize * a.shape[1])))
     out = np.unique(b, return_inverse=return_inverse, return_counts=return_counts)
     # out[0] are the sorted, unique rows
