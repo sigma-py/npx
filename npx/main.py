@@ -80,10 +80,16 @@ def subtract_at(a, indices, b):
     add_at(a, indices, -b)
 
 
-def unique_rows(a):
+def unique_rows(a, return_inverse=False, return_counts=False):
     # The numpy alternative `np.unique(a, axis=0)` is slow; cf.
     # <https://github.com/numpy/numpy/issues/11136>.
+    a = np.asarray(a)
     b = np.ascontiguousarray(a).view(np.dtype((np.void, a.dtype.itemsize * a.shape[1])))
-    a_unique, inv, cts = np.unique(b, return_inverse=True, return_counts=True)
-    a_unique = a_unique.view(a.dtype).reshape(-1, a.shape[1])
-    return a_unique, inv, cts
+    out = np.unique(b, return_inverse=return_inverse, return_counts=return_counts)
+    # out[0] are the sorted, unique rows
+    if return_inverse or return_counts:
+        out = (out[0].view(a.dtype).reshape(-1, a.shape[1]), *out[1:])
+    else:
+        out = out.view(a.dtype).reshape(-1, a.shape[1])
+
+    return out
