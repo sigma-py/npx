@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 import npx
 
@@ -60,3 +61,7 @@ def test_unique_rows():
 
     a_unique = npx.unique_rows(a)
     assert np.all(a_unique == [[1, 2], [1, 4]])
+
+    a = [1.1, 2.2]
+    with pytest.raises(ValueError):
+        a_unique = npx.unique_rows(a)
