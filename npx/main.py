@@ -43,7 +43,12 @@ def sum_at(a, indices, minlength: int):
     a = np.asarray(a)
     indices = np.asarray(indices)
 
-    assert len(a.shape) >= len(indices.shape)
+    if len(a.shape) < len(indices.shape):
+        raise RuntimeError(
+            f"a.shape = {a.shape}, indices.shape = {indices.shape}, "
+            "but len(a.shape) >= len(indices.shape) is required."
+        )
+
     m = len(indices.shape)
     assert indices.shape == a.shape[:m]
 
@@ -73,3 +78,18 @@ def add_at(a, indices, b):
 def subtract_at(a, indices, b):
     b = np.asarray(b)
     add_at(a, indices, -b)
+
+
+def unique_rows(a, return_inverse=False, return_counts=False):
+    # The numpy alternative `np.unique(a, axis=0)` is slow; cf.
+    # <https://github.com/numpy/numpy/issues/11136>.
+    a = np.asarray(a)
+    b = np.ascontiguousarray(a).view(np.dtype((np.void, a.dtype.itemsize * a.shape[1])))
+    out = np.unique(b, return_inverse=return_inverse, return_counts=return_counts)
+    # out[0] are the sorted, unique rows
+    if return_inverse or return_counts:
+        out = (out[0].view(a.dtype).reshape(-1, a.shape[1]), *out[1:])
+    else:
+        out = out.view(a.dtype).reshape(-1, a.shape[1])
+
+    return out
