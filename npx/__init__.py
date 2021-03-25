@@ -1,5 +1,6 @@
 from .__about__ import __version__
-from .main import add_at, dot, solve, subtract_at, sum_at, unique_rows
+from ._krylov import cg
+from ._main import add_at, dot, solve, subtract_at, sum_at, unique_rows
 
 __all__ = [
     "__version__",
@@ -9,4 +10,5 @@ __all__ = [
     "add_at",
     "subtract_at",
     "unique_rows",
+    "cg",
 ]

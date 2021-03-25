@@ -10,10 +10,10 @@
 [![LGTM](https://img.shields.io/lgtm/grade/python/github/nschloe/npx.svg?style=flat-square)](https://lgtm.com/projects/g/nschloe/npx)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 
-[NumPy](https://numpy.org/) is a large library used everywhere in scientific computing.
-That's why breaking backwards-compatibility is comes as a significant cost and is almost
-always avoided, even if the API of some methods is arguably confusing. This package
-provides drop-in wrappers "fixing" those.
+[NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/) are large libraries used
+everywhere in scientific computing. That's why breaking backwards-compatibility comes as
+a significant cost and is almost always avoided, even if the API of some methods is
+arguably lacking. This package provides drop-in wrappers "fixing" those.
 
 If you have a fix for a NumPy method that can't go upstream for some reason, feel free
 to PR here.
