@@ -52,5 +52,13 @@ to PR here.
   Returns the unique rows of the integer array `a`. The numpy alternative `np.unique(a,
   axis=0)` [is slow](https://github.com/numpy/numpy/issues/11136).
 
+* ```python
+  sol, info = npx.cg(A, b, tol=1.0e-10)
+  sol, info = npx.minres(A, b, tol=1.0e-10)
+  sol, info = npx.gmres(A, b, tol=1.0e-10)
+  ```
+  `sol` is the solution of the linear system `A @ x = b` (or `None` if no convergence),
+  and `info` contains some useful data, e.g., `info.resnorms`.
+
 ### License
 npx is published under the [MIT license](https://en.wikipedia.org/wiki/MIT_License).
