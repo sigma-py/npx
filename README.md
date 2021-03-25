@@ -10,10 +10,10 @@
 [![LGTM](https://img.shields.io/lgtm/grade/python/github/nschloe/npx.svg?style=flat-square)](https://lgtm.com/projects/g/nschloe/npx)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 
-[NumPy](https://numpy.org/) is a large library used everywhere in scientific computing.
-That's why breaking backwards-compatibility is comes as a significant cost and is almost
-always avoided, even if the API of some methods is arguably confusing. This package
-provides drop-in wrappers "fixing" those.
+[NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/) are large libraries used
+everywhere in scientific computing. That's why breaking backwards-compatibility comes as
+a significant cost and is almost always avoided, even if the API of some methods is
+arguably lacking. This package provides drop-in wrappers "fixing" those.
 
 If you have a fix for a NumPy method that can't go upstream for some reason, feel free
 to PR here.
@@ -51,6 +51,16 @@ to PR here.
   ```
   Returns the unique rows of the integer array `a`. The numpy alternative `np.unique(a,
   axis=0)` [is slow](https://github.com/numpy/numpy/issues/11136).
+
+* ```python
+  sol, info = npx.cg(A, b, tol=1.0e-10)
+  sol, info = npx.minres(A, b, tol=1.0e-10)
+  sol, info = npx.gmres(A, b, tol=1.0e-10)
+  ```
+  `sol` is the solution of the linear system `A @ x = b` (or `None` if no convergence),
+  and `info` contains some useful data, e.g., `info.resnorms`. The methods are wrappers
+  around [SciPy's iterative
+  solvers](https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html).
 
 ### License
 npx is published under the [MIT license](https://en.wikipedia.org/wiki/MIT_License).
