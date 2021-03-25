@@ -58,7 +58,9 @@ to PR here.
   sol, info = npx.gmres(A, b, tol=1.0e-10)
   ```
   `sol` is the solution of the linear system `A @ x = b` (or `None` if no convergence),
-  and `info` contains some useful data, e.g., `info.resnorms`.
+  and `info` contains some useful data, e.g., `info.resnorms`. The methods are wrappers
+  around [SciPy's iterative
+  solvers](https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html).
 
 ### License
 npx is published under the [MIT license](https://en.wikipedia.org/wiki/MIT_License).
