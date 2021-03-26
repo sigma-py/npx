@@ -16,7 +16,7 @@ def cg(
     maxiter: Optional[int] = None,
     M=None,
     callback=None,
-    atol: Optional[float] = None,
+    atol: Optional[float] = 0.0,
     exact_solution=None,
 ):
     resnorms = []
@@ -31,10 +31,9 @@ def cg(
         if callback is not None:
             callback(xk)
 
-        res = b - A @ xk
-        if M is not None:
-            res = M @ res
-        resnorms.append(np.sqrt(np.dot(res, res)))
+        r = b - A @ xk
+        Mr = r if M is None else M @ r
+        resnorms.append(np.sqrt(np.dot(r, Mr)))
 
         if exact_solution is not None:
             err = exact_solution - x0
@@ -62,7 +61,7 @@ def gmres(
     maxiter: Optional[int] = None,
     M=None,
     callback=None,
-    atol: Optional[float] = None,
+    atol: Optional[float] = 0.0,
     exact_solution=None,
 ):
     resnorms = []
@@ -77,10 +76,9 @@ def gmres(
         if callback is not None:
             callback(xk)
 
-        res = b - A @ xk
-        if M is not None:
-            res = M @ res
-        resnorms.append(np.sqrt(np.dot(res, res)))
+        r = b - A @ xk
+        Mr = r if M is None else M @ r
+        resnorms.append(np.sqrt(np.dot(r, Mr)))
 
         if exact_solution is not None:
             err = exact_solution - x0
@@ -131,10 +129,9 @@ def minres(
         if callback is not None:
             callback(xk)
 
-        res = b - A @ xk
-        if M is not None:
-            res = M @ res
-        resnorms.append(np.sqrt(np.dot(res, res)))
+        r = b - A @ xk
+        Mr = r if M is None else M @ r
+        resnorms.append(np.sqrt(np.dot(r, Mr)))
 
         if exact_solution is not None:
             err = exact_solution - x0
