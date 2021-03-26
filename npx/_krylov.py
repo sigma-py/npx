@@ -16,7 +16,7 @@ def cg(
     maxiter: Optional[int] = None,
     M=None,
     callback=None,
-    atol: Optional[float] = None,
+    atol: Optional[float] = 0.0,
     exact_solution=None,
 ):
     resnorms = []
@@ -61,7 +61,7 @@ def gmres(
     maxiter: Optional[int] = None,
     M=None,
     callback=None,
-    atol: Optional[float] = None,
+    atol: Optional[float] = 0.0,
     exact_solution=None,
 ):
     resnorms = []
