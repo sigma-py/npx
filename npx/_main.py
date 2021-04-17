@@ -93,9 +93,9 @@ def unique_rows(a, return_inverse=False, return_counts=False):
     b = np.ascontiguousarray(a).view(np.dtype((np.void, a.dtype.itemsize * a.shape[1])))
     out = np.unique(b, return_inverse=return_inverse, return_counts=return_counts)
     # out[0] are the sorted, unique rows
-    if return_inverse or return_counts:
-        out = (out[0].view(a.dtype).reshape(-1, *a_shape[1:]), *out[1:])
+    if isinstance(out, tuple):
+        out = (out[0].view(a.dtype).reshape(out[0].shape[0], *a_shape[1:]), *out[1:])
     else:
-        out = out.view(a.dtype).reshape(-1, *a_shape[1:])
+        out = out.view(a.dtype).reshape(out.shape[0], *a_shape[1:])
 
     return out
