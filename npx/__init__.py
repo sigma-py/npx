@@ -1,5 +1,6 @@
 from .__about__ import __version__
 from ._krylov import cg, gmres, minres
+from ._minimize import minimize
 from ._main import add_at, dot, solve, subtract_at, sum_at, unique_rows
 
 __all__ = [
@@ -13,4 +14,5 @@ __all__ = [
     "cg",
     "gmres",
     "minres",
+    "minimize",
 ]
