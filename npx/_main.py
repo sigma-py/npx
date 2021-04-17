@@ -87,13 +87,15 @@ def unique_rows(a, return_inverse=False, return_counts=False):
     if not np.issubdtype(a.dtype, np.integer):
         raise ValueError(f"Input array must be integer type, got {a.dtype}.")
 
-    p = np.prod(a.shape[1:])
-    b = np.ascontiguousarray(a).view(np.dtype((np.void, a.dtype.itemsize * p)))
+    a_shape = a.shape
+    a = a.reshape(a.shape[0], -1)
+
+    b = np.ascontiguousarray(a).view(np.dtype((np.void, a.dtype.itemsize * a.shape[1])))
     out = np.unique(b, return_inverse=return_inverse, return_counts=return_counts)
     # out[0] are the sorted, unique rows
     if return_inverse or return_counts:
-        out = (out[0].view(a.dtype).reshape(-1, *a.shape[1:]), *out[1:])
+        out = (out[0].view(a.dtype).reshape(-1, *a_shape[1:]), *out[1:])
     else:
-        out = out.view(a.dtype).reshape(-1, *a.shape[1:])
+        out = out.view(a.dtype).reshape(-1, *a_shape[1:])
 
     return out
