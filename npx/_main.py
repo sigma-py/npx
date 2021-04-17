@@ -80,7 +80,7 @@ def subtract_at(a, indices, b):
     add_at(a, indices, -b)
 
 
-def unique_rows(a, return_inverse: bool=False, return_counts: bool=False):
+def unique_rows(a, return_inverse: bool = False, return_counts: bool = False):
     # The numpy alternative `np.unique(a, axis=0)` is slow; cf.
     # <https://github.com/numpy/numpy/issues/11136>.
     a = np.asarray(a)

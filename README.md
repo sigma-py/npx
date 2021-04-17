@@ -38,7 +38,7 @@ Solves a linear equation system with a matrix of shape `(n, n)` and an array of 
 
 #### `np.ufunc.at`
 ```python
-npx.sum_at(a, idx, minlength: int = 0)
+npx.sum_at(a, idx, minlength=0)
 npx.add_at(out, idx, a)
 ```
 Returns an array with entries of `a` summed up at indices `idx` with a minumum length of
