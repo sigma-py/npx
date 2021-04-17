@@ -1,16 +1,20 @@
-import npx
 import numpy as np
 import pytest
+
+import npx
+
 
 def test_1d():
     a = [1, 2, 1]
     a_unique = npx.unique_rows(a)
     assert np.all(a_unique == [1, 2])
 
+
 def test_2d():
     a = [[1, 2], [1, 4], [1, 2]]
     a_unique = npx.unique_rows(a)
     assert np.all(a_unique == [[1, 2], [1, 4]])
+
 
 def test_3d():
     # entries are matrices
@@ -24,12 +28,14 @@ def test_3d():
     with pytest.raises(ValueError):
         a_unique = npx.unique_rows(a)
 
+
 def test_return_all():
     a = [[1, 2], [1, 4], [1, 2]]
     a_unique, inv, count = npx.unique_rows(a, return_inverse=True, return_counts=True)
     assert np.all(a_unique == [[1, 2], [1, 4]])
     assert np.all(inv == [0, 1, 0])
     assert np.all(count == [2, 1])
+
 
 def test_empty():
     # empty mesh
