@@ -1,9 +1,9 @@
 import numpy as np
+
 import npx
 
 
 def test_1d():
-
     def f(x):
         return (x ** 2 - 2) ** 2
 
