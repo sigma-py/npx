@@ -50,29 +50,3 @@ def test_subtract_at():
     tol = 1.0e-13
     ref = np.array([-3.0, -1.0])
     assert np.all(np.abs(out - ref) < (1 + np.abs(ref)) * tol)
-
-
-def test_unique_rows():
-    a = [1, 2, 1]
-    a_unique = npx.unique_rows(a)
-    assert np.all(a_unique == [1, 2])
-
-    a = [[1, 2], [1, 4], [1, 2]]
-    a_unique, inv, count = npx.unique_rows(a, return_inverse=True, return_counts=True)
-    assert np.all(a_unique == [[1, 2], [1, 4]])
-    assert np.all(inv == [0, 1, 0])
-    assert np.all(count == [2, 1])
-
-    a_unique = npx.unique_rows(a)
-    assert np.all(a_unique == [[1, 2], [1, 4]])
-
-    # entries are matrices
-    # fails for some reason. keep an eye on
-    # <https://stackoverflow.com/q/67128631/353337>
-    a = [[[3, 4], [-1, 2]], [[3, 4], [-1, 2]]]
-    a_unique = npx.unique_rows(a)
-    assert np.all(a_unique == [[[3, 4], [-1, 2]]])
-
-    a = [1.1, 2.2]
-    with pytest.raises(ValueError):
-        a_unique = npx.unique_rows(a)
