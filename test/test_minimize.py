@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 
 import npx
 
@@ -23,3 +24,12 @@ def test_2d():
 
     assert out.x.shape == np.asarray(x0).shape
     assert np.asarray(out.fun).shape == ()
+
+
+def test_error():
+    def f(x):
+        return x - 2
+
+    x0 = [1.5]
+    with pytest.raises(ValueError):
+        npx.minimize(f, x0)
