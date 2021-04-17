@@ -80,7 +80,7 @@ def subtract_at(a, indices, b):
     add_at(a, indices, -b)
 
 
-def unique_rows(a, return_inverse=False, return_counts=False):
+def unique_rows(a, return_inverse: bool = False, return_counts: bool = False):
     # The numpy alternative `np.unique(a, axis=0)` is slow; cf.
     # <https://github.com/numpy/numpy/issues/11136>.
     a = np.asarray(a)
@@ -88,14 +88,14 @@ def unique_rows(a, return_inverse=False, return_counts=False):
         raise ValueError(f"Input array must be integer type, got {a.dtype}.")
 
     a_shape = a.shape
-    a = a.reshape(a.shape[0], -1)
+    a = a.reshape(a.shape[0], np.prod(a.shape[1:], dtype=int))
 
     b = np.ascontiguousarray(a).view(np.dtype((np.void, a.dtype.itemsize * a.shape[1])))
     out = np.unique(b, return_inverse=return_inverse, return_counts=return_counts)
     # out[0] are the sorted, unique rows
-    if return_inverse or return_counts:
-        out = (out[0].view(a.dtype).reshape(-1, *a_shape[1:]), *out[1:])
+    if isinstance(out, tuple):
+        out = (out[0].view(a.dtype).reshape(out[0].shape[0], *a_shape[1:]), *out[1:])
     else:
-        out = out.view(a.dtype).reshape(-1, *a_shape[1:])
+        out = out.view(a.dtype).reshape(out.shape[0], *a_shape[1:])
 
     return out
