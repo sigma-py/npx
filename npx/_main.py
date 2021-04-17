@@ -88,7 +88,7 @@ def unique_rows(a, return_inverse=False, return_counts=False):
         raise ValueError(f"Input array must be integer type, got {a.dtype}.")
 
     a_shape = a.shape
-    a = a.reshape(a.shape[0], -1)
+    a = a.reshape(a.shape[0], np.prod(a.shape[1:], dtype=int))
 
     b = np.ascontiguousarray(a).view(np.dtype((np.void, a.dtype.itemsize * a.shape[1])))
     out = np.unique(b, return_inverse=return_inverse, return_counts=return_counts)

@@ -39,6 +39,10 @@ def test_return_all():
 
 def test_empty():
     # empty mesh
-    a = np.array([[]], dtype=int)
+    a = np.empty((1, 0), dtype=int)
     a_unique = npx.unique_rows(a)
     assert np.all(a_unique == [[]])
+
+    a = np.empty((0, 2), dtype=int)
+    a_unique = npx.unique_rows(a)
+    assert np.all(a_unique == a)
