@@ -18,49 +18,59 @@ arguably lacking. This package provides drop-in wrappers "fixing" those.
 If you have a fix for a NumPy method that can't go upstream for some reason, feel free
 to PR here.
 
-* ```python
-  npx.dot(a, b)
-  ```
-  Forms the dot product between the last axis of `a` and the _first_ axis of `b`.
 
-  (Not the second-last axis of `b` as `numpy.dot(a, b)`.)
+#### `np.dot`
+```python
+npx.dot(a, b)
+```
+Forms the dot product between the last axis of `a` and the _first_ axis of `b`.
 
-* ```python
-  npx.solve(A, b)
-  ```
-  Solves a linear equation system with a matrix of shape `(n, n)` and an array of shape
-  `(n, ...)`. The output has the same shape as the second argument.
+(Not the second-last axis of `b` as `numpy.dot(a, b)`.)
 
-* ```python
-  npx.sum_at(a, idx, minlength: int = 0)
-  npx.add_at(out, idx, a)
-  ```
-  Returns an array with entries of `a` summed up at indices `idx` with a minumum length
-  of `minlength`. `idx` can have any shape as long as it's matching `a`. The output
-  shape is `(minlength,...)`.
 
-  The numpy equivalent `numpy.add.at` is _much_
-  slower:
+#### `np.solve`
+```python
+npx.solve(A, b)
+```
+Solves a linear equation system with a matrix of shape `(n, n)` and an array of shape
+`(n, ...)`. The output has the same shape as the second argument.
 
-  <img alt="memory usage" src="https://nschloe.github.io/npx/perf-add-at.svg" width="50%">
 
-  (See also [this numpy bug](https://github.com/numpy/numpy/issues/11156).)
+#### `np.ufunc.at`
+```python
+npx.sum_at(a, idx, minlength: int = 0)
+npx.add_at(out, idx, a)
+```
+Returns an array with entries of `a` summed up at indices `idx` with a minumum length of
+`minlength`. `idx` can have any shape as long as it's matching `a`. The output shape is
+`(minlength,...)`.
 
-* ```python
-  npx.unique_rows(a, return_inverse=False, return_counts=False)
-  ```
-  Returns the unique rows of the integer array `a`. The numpy alternative `np.unique(a,
-  axis=0)` [is slow](https://github.com/numpy/numpy/issues/11136).
+The numpy equivalent `numpy.add.at` is _much_
+slower:
 
-* ```python
-  sol, info = npx.cg(A, b, tol=1.0e-10)
-  sol, info = npx.minres(A, b, tol=1.0e-10)
-  sol, info = npx.gmres(A, b, tol=1.0e-10)
-  ```
-  `sol` is the solution of the linear system `A @ x = b` (or `None` if no convergence),
-  and `info` contains some useful data, e.g., `info.resnorms`. The methods are wrappers
-  around [SciPy's iterative
-  solvers](https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html).
+<img alt="memory usage" src="https://nschloe.github.io/npx/perf-add-at.svg" width="50%">
+
+(See also [this numpy bug](https://github.com/numpy/numpy/issues/11156).)
+
+
+#### `np.unique`
+```python
+npx.unique_rows(a, return_inverse=False, return_counts=False)
+```
+Returns the unique rows of the integer array `a`. The numpy alternative `np.unique(a,
+axis=0)` [is slow](https://github.com/numpy/numpy/issues/11136).
+
+
+#### SciPy Krylov methods
+```python
+sol, info = npx.cg(A, b, tol=1.0e-10)
+sol, info = npx.minres(A, b, tol=1.0e-10)
+sol, info = npx.gmres(A, b, tol=1.0e-10)
+```
+`sol` is the solution of the linear system `A @ x = b` (or `None` if no convergence),
+and `info` contains some useful data, e.g., `info.resnorms`. The methods are wrappers
+around [SciPy's iterative
+solvers](https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html).
 
 ### License
 npx is published under the [MIT license](https://en.wikipedia.org/wiki/MIT_License).
