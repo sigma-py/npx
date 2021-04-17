@@ -50,7 +50,7 @@ slower:
 
 <img alt="memory usage" src="https://nschloe.github.io/npx/perf-add-at.svg" width="50%">
 
-(See also [this numpy bug](https://github.com/numpy/numpy/issues/11156).)
+Corresponding report: https://github.com/numpy/numpy/issues/11156.
 
 
 #### `np.unique`
@@ -58,8 +58,9 @@ slower:
 npx.unique_rows(a, return_inverse=False, return_counts=False)
 ```
 Returns the unique rows of the integer array `a`. The numpy alternative `np.unique(a,
-axis=0)` [is slow](https://github.com/numpy/numpy/issues/11136).
+axis=0)` is slow.
 
+Corresponding report: https://github.com/numpy/numpy/issues/11136.
 
 #### SciPy Krylov methods
 ```python
@@ -71,6 +72,21 @@ sol, info = npx.gmres(A, b, tol=1.0e-10)
 and `info` contains some useful data, e.g., `info.resnorms`. The methods are wrappers
 around [SciPy's iterative
 solvers](https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html).
+
+
+#### SciPy minimization
+```python
+def f(x):
+    return (x ** 2 - 2) ** 2
+
+x0 = 1.5
+out = npx.minimize(f, x0)
+```
+In SciPy, the result from a minimization `out.x` will _always_ have shape `(n,)`, no
+matter the input vector. npx changes this to respect the input vector shape.
+
+Corresponding report: https://github.com/scipy/scipy/issues/13869.
+
 
 ### License
 npx is published under the [MIT license](https://en.wikipedia.org/wiki/MIT_License).
