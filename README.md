@@ -1,12 +1,12 @@
 # npx
 
-[![PyPi Version](https://img.shields.io/pypi/v/npx.svg?style=flat-square)](https://pypi.org/project/npx)
-[![PyPI pyversions](https://img.shields.io/pypi/pyversions/npx.svg?style=flat-square)](https://pypi.org/pypi/npx/)
+[![PyPi Version](https://img.shields.io/pypi/v/npx.svg?style=flat-square)](https://pypi.org/project/npx/)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/npx.svg?style=flat-square)](https://pypi.org/project/npx/)
 [![GitHub stars](https://img.shields.io/github/stars/nschloe/npx.svg?style=flat-square&logo=github&label=Stars&logoColor=white)](https://github.com/nschloe/npx)
 [![PyPi downloads](https://img.shields.io/pypi/dm/npx.svg?style=flat-square)](https://pypistats.org/packages/npx)
 
 [![gh-actions](https://img.shields.io/github/workflow/status/nschloe/npx/ci?style=flat-square)](https://github.com/nschloe/npx/actions?query=workflow%3Aci)
-[![codecov](https://img.shields.io/codecov/c/github/nschloe/npx.svg?style=flat-square)](https://codecov.io/gh/nschloe/npx)
+[![codecov](https://img.shields.io/codecov/c/github/nschloe/npx.svg?style=flat-square)](https://app.codecov.io/gh/nschloe/npx)
 [![LGTM](https://img.shields.io/lgtm/grade/python/github/nschloe/npx.svg?style=flat-square)](https://lgtm.com/projects/g/nschloe/npx)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 
@@ -78,6 +78,7 @@ solvers](https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html).
 ```python
 def f(x):
     return (x ** 2 - 2) ** 2
+
 
 x0 = 1.5
 out = npx.minimize(f, x0)
