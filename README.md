@@ -79,6 +79,7 @@ solvers](https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html).
 def f(x):
     return (x ** 2 - 2) ** 2
 
+
 x0 = 1.5
 out = npx.minimize(f, x0)
 ```
