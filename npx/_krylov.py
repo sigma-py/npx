@@ -1,5 +1,5 @@
 from collections import namedtuple
-from typing import Optional
+from typing import Callable, Optional
 
 import numpy as np
 import scipy
@@ -15,11 +15,14 @@ def cg(
     tol: float = 1e-05,
     maxiter: Optional[int] = None,
     M=None,
-    callback=None,
+    callback: Optional[Callable] = None,
     atol: Optional[float] = 0.0,
     exact_solution=None,
 ):
     resnorms = []
+
+    if x0 is None:
+        x0 = np.zeros(A.shape[1])
 
     if exact_solution is None:
         errnorms = None
@@ -60,11 +63,14 @@ def gmres(
     restart: Optional[int] = None,
     maxiter: Optional[int] = None,
     M=None,
-    callback=None,
+    callback: Optional[Callable] = None,
     atol: Optional[float] = 0.0,
     exact_solution=None,
 ):
     resnorms = []
+
+    if x0 is None:
+        x0 = np.zeros(A.shape[1])
 
     if exact_solution is None:
         errnorms = None
@@ -114,10 +120,13 @@ def minres(
     tol: float = 1e-05,
     maxiter: Optional[int] = None,
     M=None,
-    callback=None,
+    callback: Optional[Callable] = None,
     exact_solution=None,
 ):
     resnorms = []
+
+    if x0 is None:
+        x0 = np.zeros(A.shape[1])
 
     if exact_solution is None:
         errnorms = None
