@@ -21,6 +21,9 @@ def cg(
 ):
     resnorms = []
 
+    if x0 is None:
+        x0 = np.zeros(A.shape[1])
+
     if exact_solution is None:
         errnorms = None
     else:
@@ -65,6 +68,9 @@ def gmres(
     exact_solution=None,
 ):
     resnorms = []
+
+    if x0 is None:
+        x0 = np.zeros(A.shape[1])
 
     if exact_solution is None:
         errnorms = None
@@ -118,6 +124,9 @@ def minres(
     exact_solution=None,
 ):
     resnorms = []
+
+    if x0 is None:
+        x0 = np.zeros(A.shape[1])
 
     if exact_solution is None:
         errnorms = None

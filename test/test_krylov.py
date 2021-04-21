@@ -4,7 +4,7 @@ import scipy.sparse.linalg
 import npx
 
 
-def _run(fun, resnorms1, resnorms2, tol=1.0e-13):
+def _run(method, resnorms1, resnorms2, tol=1.0e-13):
     n = 10
     data = -np.ones((3, n))
     data[1] = 2.0
@@ -12,7 +12,9 @@ def _run(fun, resnorms1, resnorms2, tol=1.0e-13):
     A = A.tocsr()
     b = np.ones(n)
 
-    sol, info = fun(A, b)
+    exact_solution = scipy.sparse.linalg.spsolve(A, b)
+
+    sol, info = method(A, b, exact_solution=exact_solution)
     assert sol is not None
     assert info.success
     resnorms1 = np.asarray(resnorms1)
@@ -23,7 +25,7 @@ def _run(fun, resnorms1, resnorms2, tol=1.0e-13):
 
     # with "preconditioning"
     M = scipy.sparse.linalg.LinearOperator((n, n), matvec=lambda x: 0.5 * x)
-    sol, info = fun(A, b, M=M)
+    sol, info = method(A, b, M=M)
 
     assert sol is not None
     assert info.success
