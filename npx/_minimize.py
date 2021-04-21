@@ -1,8 +1,10 @@
+from typing import Callable
+
 import numpy as np
 import scipy.optimize
 
 
-def minimize(fun, x0, *args, **kwargs):
+def minimize(fun: Callable, x0, *args, **kwargs):
     x0 = np.asarray(x0)
     x0_shape = x0.shape
 

@@ -1,3 +1,5 @@
+from typing import Callable
+
 import numpy as np
 
 
@@ -10,7 +12,7 @@ def _dot_last(a, b):
     return out
 
 
-def bisect(f, a, b, tol, max_num_steps=np.infty):
+def bisect(f: Callable, a, b, tol: float, max_num_steps=np.infty):
     a = np.asarray(a)
     b = np.asarray(b)
 
@@ -51,7 +53,7 @@ def bisect(f, a, b, tol, max_num_steps=np.infty):
     return a, b
 
 
-def regula_falsi(f, a, b, tol, max_num_steps=np.infty):
+def regula_falsi(f: Callable, a, b, tol: float, max_num_steps=np.infty):
     a = np.asarray(a)
     b = np.asarray(b)
     fa = np.asarray(f(a))
