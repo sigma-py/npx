@@ -62,6 +62,15 @@ axis=0)` is slow.
 
 Corresponding report: https://github.com/numpy/numpy/issues/11136.
 
+
+#### `np.isin`
+```python
+npx.isin_rows(a, b)
+```
+Returns a boolean array of length `len(a)` specifying if the rows `a[k]` appear in `b`.
+Similar to NumPy's own `np.isin` which only works for scalars.
+
+
 #### SciPy Krylov methods
 ```python
 sol, info = npx.cg(A, b, tol=1.0e-10)
