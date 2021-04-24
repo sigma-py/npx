@@ -19,7 +19,7 @@ If you have a fix for a NumPy method that can't go upstream for some reason, fee
 to PR here.
 
 
-#### `np.dot`
+#### `dot`
 ```python
 npx.dot(a, b)
 ```
@@ -36,7 +36,7 @@ Solves a linear equation system with a matrix of shape `(n, n)` and an array of 
 `(n, ...)`. The output has the same shape as the second argument.
 
 
-#### `np.ufunc.at`
+#### `sum_at`/`add_at`
 ```python
 npx.sum_at(a, idx, minlength=0)
 npx.add_at(out, idx, a)
@@ -53,7 +53,7 @@ slower:
 Corresponding report: https://github.com/numpy/numpy/issues/11156.
 
 
-#### `np.unique`
+#### `unique_rows`
 ```python
 npx.unique_rows(a, return_inverse=False, return_counts=False)
 ```
@@ -61,6 +61,15 @@ Returns the unique rows of the integer array `a`. The numpy alternative `np.uniq
 axis=0)` is slow.
 
 Corresponding report: https://github.com/numpy/numpy/issues/11136.
+
+
+#### `isin_rows`
+```python
+npx.isin_rows(a, b)
+```
+Returns a boolean array of length `len(a)` specifying if the rows `a[k]` appear in `b`.
+Similar to NumPy's own `np.isin` which only works for scalars.
+
 
 #### SciPy Krylov methods
 ```python
