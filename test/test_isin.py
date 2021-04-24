@@ -1,5 +1,6 @@
-import npx
 import numpy as np
+
+import npx
 
 
 def test_isin():
