@@ -14,7 +14,8 @@ def _run(method, resnorms1, resnorms2, tol=1.0e-13):
 
     exact_solution = scipy.sparse.linalg.spsolve(A, b)
 
-    sol, info = method(A, b, exact_solution=exact_solution, callback=lambda _: None)
+    x0 = np.zeros(A.shape[1])
+    sol, info = method(A, b, x0, exact_solution=exact_solution, callback=lambda _: None)
     assert sol is not None
     assert info.success
     print(info)
@@ -24,6 +25,8 @@ def _run(method, resnorms1, resnorms2, tol=1.0e-13):
     print()
     resnorms1 = np.asarray(resnorms1)
     assert np.all(np.abs(info.resnorms - resnorms1) < tol * (1 + resnorms1))
+    # make sure the initial errnorm is correct
+    assert abs(np.linalg.norm(x0 - exact_solution, 2) - info.errnorms[0]) < 1.0e-13
 
     # with "preconditioning"
     M = scipy.sparse.linalg.LinearOperator((n, n), matvec=lambda x: 0.5 * x)
@@ -70,17 +73,19 @@ def test_minres():
     _run(
         npx.minres,
         [
-            2.828427124746190e00,
-            2.449489742783178e00,
-            2.000000000000000e00,
-            1.414213562373095e00,
+            3.1622776601683795,
+            2.8284271247461903,
+            2.449489742783178,
+            2.0,
+            1.4142135623730951,
             8.747542958250513e-15,
         ],
         [
-            2.000000000000000e00,
-            1.732050807568877e00,
-            1.414213562373095e00,
-            1.000000000000000e00,
+            2.23606797749979,
+            2.0,
+            1.7320508075688772,
+            1.4142135623730951,
+            1.0,
             5.475099487534308e-15,
         ],
     )
