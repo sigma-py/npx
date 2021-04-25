@@ -50,7 +50,7 @@ slower:
 
 <img alt="memory usage" src="https://nschloe.github.io/npx/perf-add-at.svg" width="50%">
 
-Corresponding report: https://github.com/numpy/numpy/issues/11156.
+[Corresponding issue report](https://github.com/numpy/numpy/issues/11156)
 
 
 #### `unique_rows`
@@ -60,7 +60,7 @@ npx.unique_rows(a, return_inverse=False, return_counts=False)
 Returns the unique rows of the integer array `a`. The numpy alternative `np.unique(a,
 axis=0)` is slow.
 
-Corresponding report: https://github.com/numpy/numpy/issues/11136.
+[Corresponding issue report](https://github.com/numpy/numpy/issues/11136)
 
 
 #### `isin_rows`
@@ -95,7 +95,7 @@ out = npx.minimize(f, x0)
 In SciPy, the result from a minimization `out.x` will _always_ have shape `(n,)`, no
 matter the input vector. npx changes this to respect the input vector shape.
 
-Corresponding report: https://github.com/scipy/scipy/issues/13869.
+[Corresponding issue report](https://github.com/scipy/scipy/issues/13869)
 
 
 ### License
