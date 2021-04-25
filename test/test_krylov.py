@@ -25,7 +25,8 @@ def _run(method, resnorms1, resnorms2, tol=1.0e-13):
     print()
     resnorms1 = np.asarray(resnorms1)
     assert np.all(np.abs(info.resnorms - resnorms1) < tol * (1 + resnorms1))
-    # make sure the initial errnorm is correct
+    # make sure the initial resnorm and errnorm are correct
+    assert abs(np.linalg.norm(A @ x0 - b, 2) - info.resnorms[0]) < 1.0e-13
     assert abs(np.linalg.norm(x0 - exact_solution, 2) - info.errnorms[0]) < 1.0e-13
 
     # with "preconditioning"
