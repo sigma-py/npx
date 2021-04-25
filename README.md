@@ -82,6 +82,9 @@ and `info` contains some useful data, e.g., `info.resnorms`. The methods are wra
 around [SciPy's iterative
 solvers](https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html).
 
+Relevant issues:
+ * [inconsistent number of callback calls between cg, minres](https://github.com/scipy/scipy/issues/13936)
+
 
 #### SciPy minimization
 ```python
