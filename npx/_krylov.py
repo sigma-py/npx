@@ -8,7 +8,8 @@ import scipy.sparse.linalg
 Info = namedtuple("KrylovInfo", ["success", "xk", "numsteps", "resnorms", "errnorms"])
 
 
-def cg(
+def _wrapper(
+    method,
     A,
     b,
     x0=None,
@@ -51,13 +52,23 @@ def cg(
             err = exact_solution - x0
             errnorms.append(np.sqrt(np.dot(err, err)))
 
-    x, info = scipy.sparse.linalg.cg(
-        A, b, x0=x0, tol=tol, maxiter=maxiter, M=M, atol=atol, callback=cb
-    )
+    x, info = method(A, b, x0=x0, tol=tol, maxiter=maxiter, M=M, atol=atol, callback=cb)
 
     success = info == 0
 
     return x if success else None, Info(success, x, num_steps, resnorms, errnorms)
+
+
+def cg(*args, **kwargs):
+    return _wrapper(scipy.sparse.linalg.cg, *args, **kwargs)
+
+
+def bicg(*args, **kwargs):
+    return _wrapper(scipy.sparse.linalg.bicg, *args, **kwargs)
+
+
+def bicgstab(*args, **kwargs):
+    return _wrapper(scipy.sparse.linalg.bicgstab, *args, **kwargs)
 
 
 def gmres(
@@ -118,6 +129,8 @@ def gmres(
     return x if success else None, Info(success, x, num_steps, resnorms, errnorms)
 
 
+# Need a special minres wrapper since it doesn't have atol.
+# <https://github.com/scipy/scipy/issues/13935>
 def minres(
     A,
     b,

@@ -30,7 +30,9 @@ def _run(method, resnorms1, resnorms2, tol=1.0e-13):
     assert abs(np.linalg.norm(x0 - exact_solution, 2) - info.errnorms[0]) < 1.0e-13
 
     # with "preconditioning"
-    M = scipy.sparse.linalg.LinearOperator((n, n), matvec=lambda x: 0.5 * x)
+    M = scipy.sparse.linalg.LinearOperator(
+        (n, n), matvec=lambda x: 0.5 * x, rmatvec=lambda x: 0.5 * x
+    )
     sol, info = method(A, b, M=M)
 
     assert sol is not None
@@ -88,6 +90,50 @@ def test_minres():
             1.4142135623730951,
             1.0,
             5.475099487534308e-15,
+        ],
+    )
+
+
+def test_bicg():
+    _run(
+        npx.bicg,
+        [
+            3.1622776601683795,
+            6.324555320336759,
+            4.898979485566356,
+            3.4641016151377544,
+            2.0,
+            0.0,
+        ],
+        [
+            2.23606797749979,
+            4.47213595499958,
+            3.4641016151377544,
+            2.449489742783178,
+            1.4142135623730951,
+            0.0,
+        ],
+    )
+
+
+def test_bicgstab():
+    _run(
+        npx.bicgstab,
+        [
+            3.1622776601683795,
+            2.87802343074627,
+            1.920916697864717,
+            0.8206213643164431,
+            0.1632431286483802,
+            4.699798436761765e-15,
+        ],
+        [
+            2.23606797749979,
+            2.0350698842944595,
+            1.3582932231546119,
+            0.5802669314947132,
+            0.1154303232493776,
+            3.3232593448441795e-15,
         ],
     )
 
