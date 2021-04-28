@@ -1,6 +1,6 @@
 from .__about__ import __version__
 from ._isin import isin_rows
-from ._krylov import bicg, bicgstab, cg, gmres, minres
+from ._krylov import bicg, bicgstab, cg, cgs, gmres, minres, qmr
 from ._main import add_at, dot, solve, subtract_at, sum_at, unique_rows
 from ._minimize import minimize
 from ._nonlinear import bisect, regula_falsi
@@ -18,6 +18,8 @@ __all__ = [
     "bicg",
     "bicgstab",
     "cg",
+    "cgs",
+    "qmr",
     "gmres",
     "minres",
     #
