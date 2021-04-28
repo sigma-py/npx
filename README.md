@@ -76,6 +76,10 @@ Similar to NumPy's own `np.isin` which only works for scalars.
 sol, info = npx.cg(A, b, tol=1.0e-10)
 sol, info = npx.minres(A, b, tol=1.0e-10)
 sol, info = npx.gmres(A, b, tol=1.0e-10)
+sol, info = npx.bicg(A, b, tol=1.0e-10)
+sol, info = npx.bicgstab(A, b, tol=1.0e-10)
+sol, info = npx.cgs(A, b, tol=1.0e-10)
+sol, info = npx.qmr(A, b, tol=1.0e-10)
 ```
 `sol` is the solution of the linear system `A @ x = b` (or `None` if no convergence),
 and `info` contains some useful data, e.g., `info.resnorms`. The methods are wrappers
