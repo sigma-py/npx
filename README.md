@@ -10,10 +10,13 @@
 [![LGTM](https://img.shields.io/lgtm/grade/python/github/nschloe/npx.svg?style=flat-square)](https://lgtm.com/projects/g/nschloe/npx)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 
-[NumPy](https://numpy.org/) and [SciPy](https://www.scipy.org/) are large libraries used
-everywhere in scientific computing. That's why breaking backwards-compatibility comes as
-a significant cost and is almost always avoided, even if the API of some methods is
-arguably lacking. This package provides drop-in wrappers "fixing" those.
+[NumPy](https://numpy.org/) is a large library used everywhere in scientific computing.
+That's why breaking backwards-compatibility comes as a significant cost and is almost
+always avoided, even if the API of some methods is arguably lacking. This package
+provides drop-in wrappers "fixing" those.
+
+[scipyx](https://github.com/nschloe/scipyx) does the same for
+[SciPy](https://www.scipy.org/).
 
 If you have a fix for a NumPy method that can't go upstream for some reason, feel free
 to PR here.
@@ -50,7 +53,9 @@ slower:
 
 <img alt="memory usage" src="https://nschloe.github.io/npx/perf-add-at.svg" width="50%">
 
-[Corresponding issue report](https://github.com/numpy/numpy/issues/11156)
+Relevant issue reports:
+ * [ufunc.at (and possibly other methods)
+   slow](https://github.com/numpy/numpy/issues/11156)
 
 
 #### `unique_rows`
@@ -60,7 +65,8 @@ npx.unique_rows(a, return_inverse=False, return_counts=False)
 Returns the unique rows of the integer array `a`. The numpy alternative `np.unique(a,
 axis=0)` is slow.
 
-[Corresponding issue report](https://github.com/numpy/numpy/issues/11136)
+Relevant issue reports:
+ * [unique() needlessly slow](https://github.com/numpy/numpy/issues/11136)
 
 
 #### `isin_rows`
@@ -69,40 +75,6 @@ npx.isin_rows(a, b)
 ```
 Returns a boolean array of length `len(a)` specifying if the rows `a[k]` appear in `b`.
 Similar to NumPy's own `np.isin` which only works for scalars.
-
-
-#### SciPy Krylov methods
-```python
-sol, info = npx.cg(A, b, tol=1.0e-10)
-sol, info = npx.minres(A, b, tol=1.0e-10)
-sol, info = npx.gmres(A, b, tol=1.0e-10)
-sol, info = npx.bicg(A, b, tol=1.0e-10)
-sol, info = npx.bicgstab(A, b, tol=1.0e-10)
-sol, info = npx.cgs(A, b, tol=1.0e-10)
-sol, info = npx.qmr(A, b, tol=1.0e-10)
-```
-`sol` is the solution of the linear system `A @ x = b` (or `None` if no convergence),
-and `info` contains some useful data, e.g., `info.resnorms`. The methods are wrappers
-around [SciPy's iterative
-solvers](https://docs.scipy.org/doc/scipy/reference/sparse.linalg.html).
-
-Relevant issues:
- * [inconsistent number of callback calls between cg, minres](https://github.com/scipy/scipy/issues/13936)
-
-
-#### SciPy minimization
-```python
-def f(x):
-    return (x ** 2 - 2) ** 2
-
-
-x0 = 1.5
-out = npx.minimize(f, x0)
-```
-In SciPy, the result from a minimization `out.x` will _always_ have shape `(n,)`, no
-matter the input vector. npx changes this to respect the input vector shape.
-
-[Corresponding issue report](https://github.com/scipy/scipy/issues/13869)
 
 
 ### License
