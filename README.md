@@ -24,7 +24,14 @@ to PR here.
 
 #### `dot`
 ```python
-npx.dot(a, b)
+import npx
+import numpy as np
+
+a = np.random.rand(3, 4, 5)
+b = np.random.rand(5, 2, 2)
+
+out = npx.dot(a, b)
+# out.shape == (3, 4, 2, 2)
 ```
 Forms the dot product between the last axis of `a` and the _first_ axis of `b`.
 
@@ -33,13 +40,21 @@ Forms the dot product between the last axis of `a` and the _first_ axis of `b`.
 
 #### `np.solve`
 ```python
-npx.solve(A, b)
+import npx
+import numpy as np
+
+A = np.random.rand(3, 3)
+b = np.random.rand(3, 10, 4)
+
+out = npx.solve(A, b)
+# out.shape == (3, 10, 4)
 ```
 Solves a linear equation system with a matrix of shape `(n, n)` and an array of shape
 `(n, ...)`. The output has the same shape as the second argument.
 
 
 #### `sum_at`/`add_at`
+<!--exdown-skip-->
 ```python
 npx.sum_at(a, idx, minlength=0)
 npx.add_at(out, idx, a)
@@ -60,6 +75,11 @@ Relevant issue reports:
 
 #### `unique_rows`
 ```python
+import npx
+import numpy as np
+
+a = np.random.randint(0, 5, size=(100, 2))
+
 npx.unique_rows(a, return_inverse=False, return_counts=False)
 ```
 Returns the unique rows of the integer array `a`. The numpy alternative `np.unique(a,
@@ -71,6 +91,12 @@ Relevant issue reports:
 
 #### `isin_rows`
 ```python
+import npx
+import numpy as np
+
+a = [[0, 1], [0, 2]]
+b = np.random.randint(0, 5, size=(100, 2))
+
 npx.isin_rows(a, b)
 ```
 Returns a boolean array of length `len(a)` specifying if the rows `a[k]` appear in `b`.
