@@ -54,7 +54,7 @@ Solves a linear equation system with a matrix of shape `(n, n)` and an array of 
 
 
 #### `sum_at`/`add_at`
-<!--exdown-skip-->
+<!--pytest-codeblocks:skip-->
 ```python
 npx.sum_at(a, idx, minlength=0)
 npx.add_at(out, idx, a)
