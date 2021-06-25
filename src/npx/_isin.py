@@ -1,7 +1,8 @@
 import numpy as np
+import numpy.typing as npt
 
 
-def isin_rows(a, b):
+def isin_rows(a: npt.ArrayLike, b: npt.ArrayLike):
     a = np.asarray(a)
     b = np.asarray(b)
     if not np.issubdtype(a.dtype, np.integer):

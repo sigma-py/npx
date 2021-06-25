@@ -2,6 +2,7 @@ from functools import reduce
 from operator import mul
 
 import numpy as np
+import numpy.typing as npt
 
 
 # math.prod in 3.8
@@ -10,15 +11,16 @@ def _prod(a):
     return reduce(mul, a, 1)
 
 
-def dot(a, b):
+def dot(a: npt.ArrayLike, b: npt.ArrayLike):
     """Take arrays `a` and `b` and form the dot product between the last axis of `a` and
     the first of `b`.
     """
+    a = np.asarray(a)
     b = np.asarray(b)
     return np.dot(a, b.reshape(b.shape[0], -1)).reshape(a.shape[:-1] + b.shape[1:])
 
 
-def solve(A, x):
+def solve(A: npt.ArrayLike, x: npt.ArrayLike):
     """Solves a linear equation system with a matrix of shape (n, n) and an array of
     shape (n, ...). The output has the same shape as the second argument.
     """
@@ -27,7 +29,7 @@ def solve(A, x):
     return np.linalg.solve(A, x.reshape(x.shape[0], -1)).reshape(x.shape)
 
 
-def sum_at(a, indices, minlength: int):
+def sum_at(a: npt.ArrayLike, indices: npt.ArrayLike, minlength: int):
     """Sums up values `a` with `indices` into an output array of at least length
     `minlength` while treating dimensionality correctly. It's a lot faster than numpy's
     own np.add.at (see
@@ -65,7 +67,7 @@ def sum_at(a, indices, minlength: int):
     ).T.reshape(out_shape)
 
 
-def add_at(a, indices, b):
+def add_at(a: npt.ArrayLike, indices: npt.ArrayLike, b: npt.ArrayLike):
     a = np.asarray(a)
     indices = np.asarray(indices)
     b = np.asarray(b)
@@ -75,12 +77,14 @@ def add_at(a, indices, b):
     a += sum_at(b, indices, a.shape[0])
 
 
-def subtract_at(a, indices, b):
+def subtract_at(a: npt.ArrayLike, indices: npt.ArrayLike, b: npt.ArrayLike):
     b = np.asarray(b)
     add_at(a, indices, -b)
 
 
-def unique_rows(a, return_inverse: bool = False, return_counts: bool = False):
+def unique_rows(
+    a: npt.ArrayLike, return_inverse: bool = False, return_counts: bool = False
+):
     # The numpy alternative `np.unique(a, axis=0)` is slow; cf.
     # <https://github.com/numpy/numpy/issues/11136>.
     a = np.asarray(a)
