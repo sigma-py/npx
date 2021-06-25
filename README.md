@@ -103,6 +103,21 @@ Returns a boolean array of length `len(a)` specifying if the rows `a[k]` appear 
 Similar to NumPy's own `np.isin` which only works for scalars.
 
 
+#### `mean`
+```python
+import npx
+
+a = [1.0, 2.0, 5.0]
+npx.mean(a, p=3)
+```
+Returns the [generalized mean](https://en.wikipedia.org/wiki/Generalized_mean) of a
+given list. Handles the cases `+-np.inf` (max/min) and`0` (geometric mean) correctly.
+Also does well for large `p`.
+
+Relevant NumPy issues:
+ * [generalized mean](https://github.com/numpy/numpy/issues/19341)
+
+
 ### License
 This software is published under the [BSD-3-Clause
 license](https://spdx.org/licenses/BSD-3-Clause.html).
