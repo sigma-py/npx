@@ -30,9 +30,8 @@ def test_mean_pos(p, ref):
     "p,ref",
     [
         (-np.inf, 1.0),  # absmin
-        # (-1, -6.315789473684211),  # harmonic mean
+        (-1, -1.9672131147540985),  # harmonic mean
         # (0, 2.3403473193207156), # geometric mean
-        # (0.1, 2.3810581190184337),
         (1, -2.75),  # arithmetic mean
         (2, np.sqrt(9.75)),  # root mean square
         (np.inf, 5.0),  # absmax
@@ -43,3 +42,12 @@ def test_mean_neg(p, ref):
     val = npx.mean(a, p)
     print(p, val)
     assert abs(val - ref) < 1.0e-13 * abs(ref)
+
+
+def test_errors():
+    a = [-1.0, -2.0, -3.0, -5.0]
+    with pytest.raises(ValueError):
+        npx.mean(a, 0.5)
+
+    with pytest.raises(ValueError):
+        npx.mean(a, 0)
