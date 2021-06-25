@@ -5,7 +5,7 @@ import numpy.typing as npt
 # There also is
 # <https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.logsumexp.html>,
 # but implementation is easy enough
-def _logsumexp(x):
+def _logsumexp(x: npt.ArrayLike):
     c = np.max(x)
     return c + np.log(np.sum(np.exp(x - c)))
 
