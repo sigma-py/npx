@@ -2,12 +2,20 @@ import numpy as np
 import numpy.typing as npt
 
 
+# There also is
+# <https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.logsumexp.html>,
+# but implementation is easy enough
+def _logsumexp(x):
+    c = np.max(x)
+    return c + np.log(np.sum(np.exp(x - c)))
+
+
 def mean(x: npt.ArrayLike, p: float = 1):
     x = np.asarray(x)
     n = len(x)
     if p == 1:
         return np.mean(x)
-    elif p == -np.inf:
+    if p == -np.inf:
         return np.min(np.abs(x))
     elif p == 0:
         # first compute the root, then the product, to avoid numerical difficulties with
@@ -16,4 +24,8 @@ def mean(x: npt.ArrayLike, p: float = 1):
     elif p == np.inf:
         return np.max(np.abs(x))
 
-    return (np.sum(x ** p) / n) ** (1.0 / p)
+    if np.all(x > 0.0):
+        # logsumexp trick to avoid overflow for large p
+        return np.exp((_logsumexp(p * np.log(x)) - np.log(n)) / p)
+    else:
+        return (np.sum(x ** p) / n) ** (1.0 / p)
