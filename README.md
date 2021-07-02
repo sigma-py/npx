@@ -11,7 +11,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 
 [NumPy](https://numpy.org/) is a large library used everywhere in scientific computing.
-That's why breaking backwards-compatibility comes as a significant cost and is almost
+That's why breaking backwards-compatibility comes at a significant cost and is almost
 always avoided, even if the API of some methods is arguably lacking. This package
 provides drop-in wrappers "fixing" those.
 
