@@ -1,5 +1,4 @@
 import numpy as np
-import pytest
 
 import npx
 
@@ -24,10 +23,6 @@ def test_3d():
     a_unique = npx.unique_rows(a)
     assert np.all(a_unique == [[[3, 4], [-1, 2]]])
 
-    a = [1.1, 2.2]
-    with pytest.raises(ValueError):
-        a_unique = npx.unique_rows(a)
-
 
 def test_return_all():
     a = [[1, 2], [1, 4], [1, 2]]
@@ -46,3 +41,10 @@ def test_empty():
     a = np.empty((0, 2), dtype=int)
     a_unique = npx.unique_rows(a)
     assert np.all(a_unique == a)
+
+
+def test_float():
+    a = [1.1, 1.2, 1.1]
+    out = npx.unique_rows(a)
+    ref = np.array([1.2, 1.1])
+    assert np.all(np.abs(out - ref) < 1.0e-14)

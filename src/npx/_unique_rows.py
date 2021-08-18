@@ -10,8 +10,6 @@ def unique_rows(
     # The numpy alternative `np.unique(a, axis=0)` is slow; cf.
     # <https://github.com/numpy/numpy/issues/11136>.
     a = np.asarray(a)
-    if not np.issubdtype(a.dtype, np.integer):
-        raise ValueError(f"Input array must be integer type, got {a.dtype}.")
 
     a_shape = a.shape
     a = a.reshape(a.shape[0], np.prod(a.shape[1:], dtype=int))
