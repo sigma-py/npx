@@ -48,3 +48,10 @@ def test_float():
     out = npx.unique_rows(a)
     ref = np.array([1.2, 1.1])
     assert np.all(np.abs(out - ref) < 1.0e-14)
+
+
+def test_float_rows():
+    a = [[1.1, 0.7], [1.0, 1.2], [1.1, 0.7]]
+    out = npx.unique_rows(a)
+    ref = [[1.0, 1.2], [1.1, 0.7]]
+    assert np.all(np.abs(out - ref) < 1.0e-14)
