@@ -59,6 +59,10 @@ def sum_at(a: npt.ArrayLike, indices: npt.ArrayLike, minlength: int):
     indices = indices.reshape(-1)
     a = a.reshape(_prod(a.shape[:m]), _prod(a.shape[m:]))
 
+    # Cast to int; bincount doesn't work for uint64 yet
+    # https://github.com/numpy/numpy/issues/17760
+    indices = indices.astype(int)
+
     return np.array(
         [
             np.bincount(indices, weights=a[:, k], minlength=minlength)
