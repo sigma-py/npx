@@ -23,7 +23,7 @@ def _unique_tol(
     if len(out) == 0:
         return unique_a
 
-    return unique_a, *out
+    return (unique_a, *out)
 
 
 def unique(
