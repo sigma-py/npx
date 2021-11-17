@@ -1,16 +1,16 @@
 import numpy as np
-import numpy.typing as npt
+from numpy.typing import ArrayLike
 
 
 # There also is
 # <https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.logsumexp.html>,
 # but implementation is easy enough
-def _logsumexp(x: npt.ArrayLike):
+def _logsumexp(x: ArrayLike):
     c = np.max(x)
     return c + np.log(np.sum(np.exp(x - c)))
 
 
-def mean(x: npt.ArrayLike, p: float = 1):
+def mean(x: ArrayLike, p: float = 1) -> np.ndarray:
     x = np.asarray(x)
 
     n = len(x)

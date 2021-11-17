@@ -63,7 +63,7 @@ npx.sum_at(a, idx, minlength=0)
 npx.add_at(out, idx, a)
 ```
 
-Returns an array with entries of `a` summed up at indices `idx` with a minumum length of
+Returns an array with entries of `a` summed up at indices `idx` with a minimum length of
 `minlength`. `idx` can have any shape as long as it's matching `a`. The output shape is
 `(minlength,...)`.
 
@@ -77,8 +77,25 @@ Relevant issue reports:
 - [ufunc.at (and possibly other methods)
   slow](https://github.com/numpy/numpy/issues/11156)
 
-#### `unique_rows`
 
+#### `unique`
+
+```python
+import npx
+
+a = [0.1, 0.15, 0.7]
+a_unique, inv = npx.unique(a, tol=2.0e-1, return_inverse=True)
+
+assert all(a_unique == [0.1, 0.7])
+```
+
+npx's `unique()` works just like NumPy's, except that it provides a parameter
+`tol` (default `0.0`) which allows the user to set a tolerance. The real line
+is essentially partitioned into bins of size `tol` and at most one
+representative of each bin is returned.
+
+
+#### `unique_rows`
 ```python
 import npx
 import numpy as np
