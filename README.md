@@ -86,7 +86,7 @@ import npx
 a = [0.1, 0.15, 0.7]
 a_unique, inv = npx.unique(a, tol=2.0e-1, return_inverse=True)
 
-assert np.all(a_unique == [0.1, 0.7])
+assert all(a_unique == [0.1, 0.7])
 ```
 
 npx's `unique()` works just like NumPy's, except that it provides a parameter
