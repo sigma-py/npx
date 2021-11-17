@@ -20,6 +20,9 @@ def _unique_tol(
     if return_index:
         out = [idx, *out]
 
+    if len(out) == 0:
+        return unique_a
+
     return unique_a, *out
 
 

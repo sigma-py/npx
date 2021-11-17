@@ -3,7 +3,8 @@
 [![PyPi Version](https://img.shields.io/pypi/v/npx.svg?style=flat-square)](https://pypi.org/project/npx/)
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/npx.svg?style=flat-square)](https://pypi.org/project/npx/)
 [![GitHub stars](https://img.shields.io/github/stars/nschloe/npx.svg?style=flat-square&logo=github&label=Stars&logoColor=white)](https://github.com/nschloe/npx)
-[![PyPi downloads](https://img.shields.io/pypi/dm/npx.svg?style=flat-square)](https://pypistats.org/packages/npx)
+[![Downloads](https://pepy.tech/badge/npx/month?style=flat-square)](https://pepy.tech/project/npx)
+<!--[![PyPi downloads](https://img.shields.io/pypi/dm/npx.svg?style=flat-square)](https://pypistats.org/packages/npx)-->
 
 [![gh-actions](https://img.shields.io/github/workflow/status/nschloe/npx/ci?style=flat-square)](https://github.com/nschloe/npx/actions?query=workflow%3Aci)
 [![codecov](https://img.shields.io/codecov/c/github/nschloe/npx.svg?style=flat-square)](https://app.codecov.io/gh/nschloe/npx)
@@ -84,7 +85,7 @@ Relevant issue reports:
 import npx
 
 a = [0.1, 0.15, 0.7]
-a_unique, inv = npx.unique(a, tol=2.0e-1, return_inverse=True)
+a_unique = npx.unique(a, tol=2.0e-1)
 
 assert all(a_unique == [0.1, 0.7])
 ```
