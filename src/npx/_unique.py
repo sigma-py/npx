@@ -10,7 +10,12 @@ def _unique_tol(
     unique_fun: Callable, a: ArrayLike, tol: float, **kwargs
 ) -> np.ndarray | tuple[np.ndarray, ...]:
     a = np.asarray(a)
-    aint = (a / tol).astype(int)
+    # compute 1/tol first. Difference:
+    #
+    #   int(3.3 / 0.1) = int(32.99999999999999) = 32
+    #   int(3.3 * (1.0 / 0.1)) = int(33.0) = 33
+    #
+    aint = (a * (1.0 / tol)).astype(int)
 
     return_index = kwargs.pop("return_index", False)
 
