@@ -17,3 +17,10 @@ def test_solve():
     b = np.random.rand(3, 4, 5)
     c = npx.solve(a, b)
     assert c.shape == b.shape
+
+
+def test_outer():
+    a = np.random.rand(1, 2)
+    b = np.random.rand(3, 4)
+    c = npx.outer(a, b)
+    assert c.shape == (1, 2, 3, 4)
