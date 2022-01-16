@@ -20,6 +20,15 @@ def dot(a: ArrayLike, b: ArrayLike) -> np.ndarray:
     return np.dot(a, b.reshape(b.shape[0], -1)).reshape(a.shape[:-1] + b.shape[1:])
 
 
+def outer(a: ArrayLike, b: ArrayLike) -> np.ndarray:
+    """Compute the outer product of two arrays `a` and `b` such that the shape
+    of the resulting array is `(*a.shape, *b.shape)`.
+    """
+    a = np.asarray(a)
+    b = np.asarray(b)
+    return np.outer(a, b).reshape(*a.shape, *b.shape)
+
+
 def solve(A: ArrayLike, x: ArrayLike) -> np.ndarray:
     """Solves a linear equation system with a matrix of shape (n, n) and an array of
     shape (n, ...). The output has the same shape as the second argument.
