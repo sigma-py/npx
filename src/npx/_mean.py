@@ -39,4 +39,4 @@ def mean(x: ArrayLike, p: float = 1) -> np.ndarray:
         # only works for positive x though
         return np.exp((_logsumexp(p * np.log(x)) - np.log(n)) / p)
     else:
-        return (np.sum(x ** p) / n) ** (1.0 / p)
+        return (np.sum(x**p) / n) ** (1.0 / p)
