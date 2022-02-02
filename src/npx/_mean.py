@@ -11,6 +11,10 @@ def _logsumexp(x: ArrayLike):
 
 
 def mean(x: ArrayLike, p: float = 1) -> np.ndarray:
+    """Generalized mean.
+
+    See <https://github.com/numpy/numpy/issues/19341> for the numpy issue.
+    """
     x = np.asarray(x)
 
     n = len(x)
@@ -24,15 +28,17 @@ def mean(x: ArrayLike, p: float = 1) -> np.ndarray:
         if np.any(x < 0.0):
             raise ValueError("p=0 only works with nonnegative x.")
         return np.prod(np.power(x, 1 / n))
+        # alternative:
+        # return np.exp(np.mean(np.log(x)))
     elif p == np.inf:
         return np.max(np.abs(x))
-
-    if not isinstance(p, int) and np.any(x < 0.0):
-        raise ValueError("Non-integer p only work with nonnegative x.")
 
     if np.all(x > 0.0):
         # logsumexp trick to avoid overflow for large p
         # only works for positive x though
         return np.exp((_logsumexp(p * np.log(x)) - np.log(n)) / p)
-    else:
-        return (np.sum(x ** p) / n) ** (1.0 / p)
+
+    if not isinstance(p, (int, np.integer)):
+        raise ValueError(f"Non-integer p (={p}) only work with nonnegative x.")
+
+    return (np.sum(x**p) / n) ** (1.0 / p)

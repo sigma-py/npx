@@ -37,6 +37,6 @@ def npx_sum_at(data):
 b = perfplot.bench(
     setup=setup,
     kernels=[np_add_at, npx_add_at, npx_sum_at],
-    n_range=[2 ** k for k in range(23)],
+    n_range=[2**k for k in range(23)],
 )
 b.save("perf-add-at.svg")
