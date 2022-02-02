@@ -15,9 +15,7 @@ def dot(a: ArrayLike, b: ArrayLike) -> np.ndarray:
     """Take arrays `a` and `b` and form the dot product between the last axis of `a` and
     the first of `b`.
     """
-    a = np.asarray(a)
-    b = np.asarray(b)
-    return np.dot(a, b.reshape(b.shape[0], -1)).reshape(a.shape[:-1] + b.shape[1:])
+    return np.tensordot(a, b, 1)
 
 
 def outer(a: ArrayLike, b: ArrayLike) -> np.ndarray:
