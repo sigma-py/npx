@@ -11,7 +11,7 @@ def _prod(a):
     return reduce(mul, a, 1)
 
 
-def dot(a: ArrayLike, b: ArrayLike) -> np.ndarray:
+def dot(a: np.ndarray, b: np.ndarray) -> np.ndarray:
     """Take arrays `a` and `b` and form the dot product between the last axis of `a` and
     the first of `b`.
     """
@@ -27,7 +27,7 @@ def outer(a: ArrayLike, b: ArrayLike) -> np.ndarray:
     return np.outer(a, b).reshape(*a.shape, *b.shape)
 
 
-def solve(A: ArrayLike, x: ArrayLike) -> np.ndarray:
+def solve(A: np.ndarray, x: np.ndarray) -> np.ndarray:
     """Solves a linear equation system with a matrix of shape (n, n) and an array of
     shape (n, ...). The output has the same shape as the second argument.
     """

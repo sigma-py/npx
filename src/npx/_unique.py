@@ -41,12 +41,7 @@ def unique(
     return np.unique(a, **kwargs)
 
 
-def unique_rows(
-    a: ArrayLike,
-    return_index: bool = False,
-    return_inverse: bool = False,
-    return_counts: bool = False,
-) -> np.ndarray | tuple[np.ndarray, ...]:
+def unique_rows(a: ArrayLike, **kwargs) -> np.ndarray | tuple[np.ndarray, ...]:
     # The numpy alternative `np.unique(a, axis=0)` is slow; cf.
     # <https://github.com/numpy/numpy/issues/11136>.
     a = np.asarray(a)
@@ -55,12 +50,7 @@ def unique_rows(
     a = a.reshape(a.shape[0], np.prod(a.shape[1:], dtype=int))
 
     b = np.ascontiguousarray(a).view(np.dtype((np.void, a.dtype.itemsize * a.shape[1])))
-    out = np.unique(
-        b,
-        return_index=return_index,
-        return_inverse=return_inverse,
-        return_counts=return_counts,
-    )
+    out = np.unique(b, **kwargs)
     # out[0] are the sorted, unique rows
     if isinstance(out, tuple):
         out = (out[0].view(a.dtype).reshape(out[0].shape[0], *a_shape[1:]), *out[1:])
