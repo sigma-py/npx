@@ -1,6 +1,5 @@
 import numpy as np
 import pytest
-from scipy.stats import pmean
 
 import npx
 
