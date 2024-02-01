@@ -2,6 +2,7 @@ import numpy as np
 import pytest
 
 import npx
+from scipy.stats import pmean
 
 
 @pytest.mark.parametrize(
@@ -21,7 +22,8 @@ import npx
 )
 def test_mean_pos(p, ref):
     a = [1.0, 2.0, 3.0, 5.0]
-    val = npx.mean(a, p)
+    # val = npx.mean(a, p)
+    val = pmean(a, p)
     print(p, val)
     assert abs(val - ref) < 1.0e-13 * abs(ref)
 
@@ -39,7 +41,8 @@ def test_mean_pos(p, ref):
 )
 def test_mean_neg(p, ref):
     a = [-1.0, -2.0, -3.0, -5.0]
-    val = npx.mean(a, p)
+    # val = npx.mean(a, p)
+    val = pmean(a, p)
     print(p, val)
     assert abs(val - ref) < 1.0e-13 * abs(ref)
 

@@ -11,9 +11,9 @@ def _prod(a):
     return reduce(mul, a, 1)
 
 
-def dot(a: np.ndarray, b: np.ndarray) -> np.ndarray:
-    """Take arrays `a` and `b` and form the dot product between the last axis of `a` and
-    the first of `b`.
+def dot(a: ArrayLike, b: np.ndarray) -> np.ndarray:
+    """Take arrays `a` and `b` and form the dot product between the last axis
+    of `a` and the first of `b`.
     """
     return np.tensordot(a, b, 1)
 

@@ -1,12 +1,10 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
-build-backend = "flit_core.buildapi"
-
-[tool.isort]
-profile = "black"
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "npx"
+version = "0.1.1"
 authors = [{name = "Nico Schlömer", email = "nico.schloemer@gmail.com"}]
 description = "Some useful extensions for NumPy"
 readme = "README.md"
@@ -22,14 +20,27 @@ classifiers = [
   "Programming Language :: Python :: 3.8",
   "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   "Topic :: Scientific/Engineering",
   "Topic :: Utilities",
 ]
-dynamic = ["version"]
 requires-python = ">=3.7"
-dependencies = ["numpy >= 1.20.0"]
+dependencies = ["numpy >= 1.20.0", "scipy >= 1.8"]
 
 [project.urls]
-Code = "https://github.com/nschloe/npx"
-Issues = "https://github.com/nschloe/npx/issues"
-Funding = "https://github.com/sponsors/nschloe"
+Code = "https://github.com/sigma-py/npx"
+Issues = "https://github.com/sigma-py/npx/issues"
+
+[tool.ruff]
+src = ["src", "tests"]
+line-length = 88
+select = ["ALL"]
+# ignore = [
+#   "ANN", "C901", "D", "E741", "ERA", "FBT", "INP001",
+#   "N", "PLR", "S101", "T201", "TID252", "TD", "FIX002"
+# ]
+target-version = "py38"
+
+[tool.mypy]
+ignore_missing_imports = true

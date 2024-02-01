@@ -20,9 +20,11 @@ def mean(x: ArrayLike, p: float = 1) -> np.ndarray:
     n = len(x)
     if p == 1:
         return np.mean(x)
+
     if p == -np.inf:
         return np.min(np.abs(x))
-    elif p == 0:
+
+    if p == 0:
         # first compute the root, then the product, to avoid numerical difficulties with
         # too small values of prod(x)
         if np.any(x < 0.0):
@@ -30,7 +32,8 @@ def mean(x: ArrayLike, p: float = 1) -> np.ndarray:
         return np.prod(np.power(x, 1 / n))
         # alternative:
         # return np.exp(np.mean(np.log(x)))
-    elif p == np.inf:
+
+    if p == np.inf:
         return np.max(np.abs(x))
 
     if np.all(x > 0.0):

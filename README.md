@@ -4,11 +4,11 @@
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/npx.svg?style=flat-square)](https://pypi.org/project/npx/)
 [![GitHub stars](https://img.shields.io/github/stars/nschloe/npx.svg?style=flat-square&logo=github&label=Stars&logoColor=white)](https://github.com/nschloe/npx)
 [![Downloads](https://pepy.tech/badge/npx/month?style=flat-square)](https://pepy.tech/project/npx)
+
 <!--[![PyPi downloads](https://img.shields.io/pypi/dm/npx.svg?style=flat-square)](https://pypistats.org/packages/npx)-->
 
 [![gh-actions](https://img.shields.io/github/workflow/status/nschloe/npx/ci?style=flat-square)](https://github.com/nschloe/npx/actions?query=workflow%3Aci)
 [![codecov](https://img.shields.io/codecov/c/github/nschloe/npx.svg?style=flat-square)](https://app.codecov.io/gh/nschloe/npx)
-[![LGTM](https://img.shields.io/lgtm/grade/python/github/nschloe/npx.svg?style=flat-square)](https://lgtm.com/projects/g/nschloe/npx)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 
 [NumPy](https://numpy.org/) is a large library used everywhere in scientific computing.
@@ -78,7 +78,6 @@ Relevant issue reports:
 - [ufunc.at (and possibly other methods)
   slow](https://github.com/numpy/numpy/issues/11156)
 
-
 #### `unique`
 
 ```python
@@ -95,8 +94,8 @@ npx's `unique()` works just like NumPy's, except that it provides a parameter
 is essentially partitioned into bins of size `tol` and at most one
 representative of each bin is returned.
 
-
 #### `unique_rows`
+
 ```python
 import npx
 import numpy as np

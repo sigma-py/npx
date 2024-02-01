@@ -1,4 +1,4 @@
-version := `python3 -c "from src.npx.__about__ import __version__; print(__version__)"`
+version := `python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])"`
 
 default:
 	@echo "\"just publish\"?"
@@ -6,17 +6,15 @@ default:
 publish:
 	@if [ "$(git rev-parse --abbrev-ref HEAD)" != "main" ]; then exit 1; fi
 	gh release create "v{{version}}"
-	flit publish
 
 clean:
 	@find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
-	@rm -rf src/*.egg-info/ build/ dist/ .tox/
+	@rm -rf src/*.egg-info/ build/ dist/ .tox/ .mypy_cache/
 
 format:
-	isort .
-	black .
+	ruff --fix src/ tests/
+	black src/ tests/
 	blacken-docs README.md
 
 lint:
-	black --check .
-	flake8 .
+	pre-commit run --all
