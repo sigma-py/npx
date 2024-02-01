@@ -11,9 +11,9 @@ def _prod(a):
     return reduce(mul, a, 1)
 
 
-def dot(a: np.ndarray, b: np.ndarray) -> np.ndarray:
-    """Take arrays `a` and `b` and form the dot product between the last axis of `a` and
-    the first of `b`.
+def dot(a: ArrayLike, b: np.ndarray) -> np.ndarray:
+    """Take arrays `a` and `b` and form the dot product between the last axis
+    of `a` and the first of `b`.
     """
     return np.tensordot(a, b, 1)
 
@@ -37,26 +37,27 @@ def solve(A: np.ndarray, x: np.ndarray) -> np.ndarray:
 
 
 def sum_at(a: ArrayLike, indices: ArrayLike, minlength: int):
-    """Sums up values `a` with `indices` into an output array of at least length
-    `minlength` while treating dimensionality correctly. It's a lot faster than numpy's
-    own np.add.at (see
+    """Sums up values `a` with `indices` into an output array of at least
+    length `minlength` while treating dimensionality correctly. It's a lot
+    faster than numpy's own np.add.at (see
     https://github.com/numpy/numpy/issues/5922#issuecomment-511477435).
 
     Typically, `indices` will be a one-dimensional array; `a` can have any
     dimensionality. In this case, the output array will have shape (minlength,
     a.shape[1:]).
 
-    `indices` may have arbitrary shape, too, but then `a` has to start out the same.
-    (Those dimensions are flattened out in the computation.)
+    `indices` may have arbitrary shape, too, but then `a` has to start out the
+    same. (Those dimensions are flattened out in the computation.)
     """
     a = np.asarray(a)
     indices = np.asarray(indices)
 
     if len(a.shape) < len(indices.shape):
-        raise RuntimeError(
+        msg = (
             f"a.shape = {a.shape}, indices.shape = {indices.shape}, "
             "but len(a.shape) >= len(indices.shape) is required."
         )
+        raise RuntimeError(msg)
 
     m = len(indices.shape)
     assert indices.shape == a.shape[:m]
@@ -74,7 +75,7 @@ def sum_at(a: ArrayLike, indices: ArrayLike, minlength: int):
         [
             np.bincount(indices, weights=a[:, k], minlength=minlength)
             for k in range(a.shape[1])
-        ]
+        ],
     ).T.reshape(out_shape)
 
 

@@ -5,7 +5,7 @@ import npx
 
 
 @pytest.mark.parametrize(
-    "p,ref",
+    ("p", "ref"),
     [
         (-np.inf, 1.0),  # min
         (-20000, 1.0000693171203765),
@@ -22,12 +22,13 @@ import npx
 def test_mean_pos(p, ref):
     a = [1.0, 2.0, 3.0, 5.0]
     val = npx.mean(a, p)
-    print(p, val)
+    # val = pmean(a, p)
+    # print(p, val)
     assert abs(val - ref) < 1.0e-13 * abs(ref)
 
 
 @pytest.mark.parametrize(
-    "p,ref",
+    ("p", "ref"),
     [
         (-np.inf, 1.0),  # absmin
         (-1, -1.9672131147540985),  # harmonic mean
@@ -40,14 +41,15 @@ def test_mean_pos(p, ref):
 def test_mean_neg(p, ref):
     a = [-1.0, -2.0, -3.0, -5.0]
     val = npx.mean(a, p)
-    print(p, val)
+    # val = pmean(a, p)
+    # print(p, val)
     assert abs(val - ref) < 1.0e-13 * abs(ref)
 
 
 def test_errors():
     a = [-1.0, -2.0, -3.0, -5.0]
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError, match="Non-integer p.*"):
         npx.mean(a, 0.5)
 
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="p=0 only works with nonnegative x."):
         npx.mean(a, 0)

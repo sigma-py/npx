@@ -1,13 +1,18 @@
 from __future__ import annotations
 
-from typing import Callable
+from typing import TYPE_CHECKING, Callable
 
 import numpy as np
-from numpy.typing import ArrayLike
+
+if TYPE_CHECKING:
+    from numpy.typing import ArrayLike
 
 
 def _unique_tol(
-    unique_fun: Callable, a: ArrayLike, tol: float, **kwargs
+    unique_fun: Callable,
+    a: ArrayLike,
+    tol: float,
+    **kwargs,
 ) -> np.ndarray | tuple[np.ndarray, ...]:
     a = np.asarray(a)
     # compute 1/tol first. Difference:
@@ -32,7 +37,9 @@ def _unique_tol(
 
 
 def unique(
-    a: ArrayLike, tol: float = 0.0, **kwargs
+    a: ArrayLike,
+    tol: float = 0.0,
+    **kwargs,
 ) -> np.ndarray | tuple[np.ndarray, ...]:
     assert tol >= 0.0
     if tol > 0.0:
