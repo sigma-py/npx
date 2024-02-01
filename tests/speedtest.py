@@ -3,14 +3,14 @@ import perfplot
 
 import npx
 
-np.random.seed(0)
+rng = np.random.default_rng(0)
 
 m = 100
 
 
 def setup(n):
-    idx = np.random.randint(0, m, n)
-    b = np.random.rand(n)
+    idx = rng.randomint(0, m, n)
+    b = rng.random(n)
     return idx, b
 
 
@@ -30,8 +30,7 @@ def npx_add_at(data):
 
 def npx_sum_at(data):
     idx, b = data
-    out = npx.sum_at(b, idx, minlength=m)
-    return out
+    return npx.sum_at(b, idx, minlength=m)
 
 
 b = perfplot.bench(

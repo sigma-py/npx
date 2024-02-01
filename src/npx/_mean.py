@@ -25,10 +25,11 @@ def mean(x: ArrayLike, p: float = 1) -> np.ndarray:
         return np.min(np.abs(x))
 
     if p == 0:
-        # first compute the root, then the product, to avoid numerical difficulties with
-        # too small values of prod(x)
+        # first compute the root, then the product, to avoid numerical
+        # difficulties with too small values of prod(x)
         if np.any(x < 0.0):
-            raise ValueError("p=0 only works with nonnegative x.")
+            msg = "p=0 only works with nonnegative x."
+            raise ValueError(msg)
         return np.prod(np.power(x, 1 / n))
         # alternative:
         # return np.exp(np.mean(np.log(x)))
@@ -42,6 +43,7 @@ def mean(x: ArrayLike, p: float = 1) -> np.ndarray:
         return np.exp((_logsumexp(p * np.log(x)) - np.log(n)) / p)
 
     if not isinstance(p, (int, np.integer)):
-        raise ValueError(f"Non-integer p (={p}) only work with nonnegative x.")
+        msg = f"Non-integer p (={p}) only work with nonnegative x."
+        raise TypeError(msg)
 
     return (np.sum(x**p) / n) ** (1.0 / p)

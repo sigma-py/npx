@@ -1,12 +1,12 @@
 import numpy as np
 import pytest
+from scipy.stats import pmean
 
 import npx
-from scipy.stats import pmean
 
 
 @pytest.mark.parametrize(
-    "p,ref",
+    ("p", "ref"),
     [
         (-np.inf, 1.0),  # min
         (-20000, 1.0000693171203765),
@@ -29,7 +29,7 @@ def test_mean_pos(p, ref):
 
 
 @pytest.mark.parametrize(
-    "p,ref",
+    ("p", "ref"),
     [
         (-np.inf, 1.0),  # absmin
         (-1, -1.9672131147540985),  # harmonic mean
@@ -49,8 +49,8 @@ def test_mean_neg(p, ref):
 
 def test_errors():
     a = [-1.0, -2.0, -3.0, -5.0]
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="x"):
         npx.mean(a, 0.5)
 
-    with pytest.raises(ValueError):
+    with pytest.raises(ValueError, match="x"):
         npx.mean(a, 0)
