@@ -48,8 +48,8 @@ def test_mean_neg(p, ref):
 
 def test_errors():
     a = [-1.0, -2.0, -3.0, -5.0]
-    with pytest.raises(TypeError, match="Non-integer p.*"):
+    with pytest.raises(TypeError, match=r"Non-integer p.*"):
         npx.mean(a, 0.5)
 
-    with pytest.raises(ValueError, match="p=0 only works with nonnegative x."):
+    with pytest.raises(ValueError, match=r"p=0 only works with nonnegative x."):
         npx.mean(a, 0)
