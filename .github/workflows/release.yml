@@ -13,21 +13,16 @@ jobs:
       contents: read # required for checkout
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.11"
+          enable-cache: true
 
-      - name: Build stubs
-        run: |
-          pip install mypy
-          stubgen --include-docstrings src/ -o src/
+      - name: Build package
+        run: uv build
 
-      - name: Build wheels
-        run: |
-          pip install build
-          python3 -m build --wheel
-
-      - name: Upload to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+      - name: Publish to PyPI
+        # uv publish automatically detects the OIDC token in GitHub Actions
+        run: uv publish

@@ -4,15 +4,14 @@ from ._mean import mean
 from ._unique import unique, unique_rows
 
 __all__ = [
-    "dot",
-    "outer",
-    "solve",
-    "sum_at",
     "add_at",
-    "subtract_at",
-    "unique_rows",
+    "dot",
     "isin_rows",
     "mean",
+    "outer",
+    "solve",
+    "subtract_at",
+    "sum_at",
     "unique",
     "unique_rows",
 ]

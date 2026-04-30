@@ -12,9 +12,12 @@ clean:
 	@rm -rf src/*.egg-info/ build/ dist/ .tox/ .mypy_cache/
 
 format:
-	ruff --fix src/ tests/
-	black src/ tests/
+	ruff format src/ tests/
+	ruff check --fix src/ tests/
 	blacken-docs README.md
 
 lint:
-	pre-commit run --all
+	prek run --all-files
+
+test *args:
+  uv run pytest -W error {{args}}

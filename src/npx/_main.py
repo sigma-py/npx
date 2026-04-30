@@ -1,14 +1,9 @@
-from functools import reduce
-from operator import mul
+from math import prod
 
 import numpy as np
 from numpy.typing import ArrayLike
 
-
-# math.prod in 3.8
-# https://docs.python.org/3/library/math.html#math.prod
-def _prod(a):
-    return reduce(mul, a, 1)
+from ._helpers import deprecated
 
 
 def dot(a: ArrayLike, b: np.ndarray) -> np.ndarray:
@@ -36,6 +31,7 @@ def solve(A: np.ndarray, x: np.ndarray) -> np.ndarray:
     return np.linalg.solve(A, x.reshape(x.shape[0], -1)).reshape(x.shape)
 
 
+@deprecated("np.add.at is now equally fast. Use that.")
 def sum_at(a: ArrayLike, indices: ArrayLike, minlength: int):
     """Sums up values `a` with `indices` into an output array of at least
     length `minlength` while treating dimensionality correctly. It's a lot
@@ -49,6 +45,10 @@ def sum_at(a: ArrayLike, indices: ArrayLike, minlength: int):
     `indices` may have arbitrary shape, too, but then `a` has to start out the
     same. (Those dimensions are flattened out in the computation.)
     """
+    return _sum_at(a, indices, minlength)
+
+
+def _sum_at(a: ArrayLike, indices: ArrayLike, minlength: int):
     a = np.asarray(a)
     indices = np.asarray(indices)
 
@@ -65,7 +65,7 @@ def sum_at(a: ArrayLike, indices: ArrayLike, minlength: int):
     out_shape = (minlength, *a.shape[m:])
 
     indices = indices.reshape(-1)
-    a = a.reshape(_prod(a.shape[:m]), _prod(a.shape[m:]))
+    a = a.reshape(prod(a.shape[:m]), prod(a.shape[m:]))
 
     # Cast to int; bincount doesn't work for uint64 yet
     # https://github.com/numpy/numpy/issues/17760
@@ -79,16 +79,22 @@ def sum_at(a: ArrayLike, indices: ArrayLike, minlength: int):
     ).T.reshape(out_shape)
 
 
+@deprecated("np.add.at is now equally fast. Use that.")
 def add_at(a: ArrayLike, indices: ArrayLike, b: ArrayLike):
+    return _add_at(a, indices, b)
+
+
+def _add_at(a: ArrayLike, indices: ArrayLike, b: ArrayLike):
     a = np.asarray(a)
     indices = np.asarray(indices)
     b = np.asarray(b)
 
     m = len(indices.shape)
     assert a.shape[1:] == b.shape[m:]
-    a += sum_at(b, indices, a.shape[0])
+    a += _sum_at(b, indices, a.shape[0])
 
 
+@deprecated("np.subtract.at is now equally fast. Use that.")
 def subtract_at(a: ArrayLike, indices: ArrayLike, b: ArrayLike):
     b = np.asarray(b)
-    add_at(a, indices, -b)
+    _add_at(a, indices, -b)
