@@ -30,6 +30,7 @@ def solve(A: np.ndarray, x: np.ndarray) -> np.ndarray:
     x = np.asarray(x)
     return np.linalg.solve(A, x.reshape(x.shape[0], -1)).reshape(x.shape)
 
+
 @deprecated("np.add.at is now equally fast. Use that.")
 def sum_at(a: ArrayLike, indices: ArrayLike, minlength: int):
     """Sums up values `a` with `indices` into an output array of at least
@@ -44,6 +45,10 @@ def sum_at(a: ArrayLike, indices: ArrayLike, minlength: int):
     `indices` may have arbitrary shape, too, but then `a` has to start out the
     same. (Those dimensions are flattened out in the computation.)
     """
+    return _sum_at(a, indices, minlength)
+
+
+def _sum_at(a: ArrayLike, indices: ArrayLike, minlength: int):
     a = np.asarray(a)
     indices = np.asarray(indices)
 
@@ -76,16 +81,20 @@ def sum_at(a: ArrayLike, indices: ArrayLike, minlength: int):
 
 @deprecated("np.add.at is now equally fast. Use that.")
 def add_at(a: ArrayLike, indices: ArrayLike, b: ArrayLike):
+    return _add_at(a, indices, b)
+
+
+def _add_at(a: ArrayLike, indices: ArrayLike, b: ArrayLike):
     a = np.asarray(a)
     indices = np.asarray(indices)
     b = np.asarray(b)
 
     m = len(indices.shape)
     assert a.shape[1:] == b.shape[m:]
-    a += sum_at(b, indices, a.shape[0])
+    a += _sum_at(b, indices, a.shape[0])
 
 
 @deprecated("np.subtract.at is now equally fast. Use that.")
 def subtract_at(a: ArrayLike, indices: ArrayLike, b: ArrayLike):
     b = np.asarray(b)
-    add_at(a, indices, -b)
+    _add_at(a, indices, -b)

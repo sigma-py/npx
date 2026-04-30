@@ -18,6 +18,7 @@ jobs:
         uses: j178/prek-action@v2
 
   build:
+    needs: [lint]
     runs-on: ubuntu-latest
     strategy:
       matrix:
