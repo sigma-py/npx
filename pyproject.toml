@@ -30,6 +30,9 @@ dependencies = [
   # "scipy >= 1.8",
 ]
 
+[dependency-groups]
+dev = ["pytest"]
+
 [project.urls]
 Code = "https://github.com/sigma-py/npx"
 Issues = "https://github.com/sigma-py/npx/issues"

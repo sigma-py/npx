@@ -18,3 +18,6 @@ format:
 
 lint:
 	prek run --all-files
+
+test *args:
+  uv run pytest -W error {{args}}
