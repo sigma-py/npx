@@ -17,4 +17,4 @@ format:
 	blacken-docs README.md
 
 lint:
-	pre-commit run --all
+	prek run --all-files

@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Run pre-commit
         uses: pre-commit/action@v3.0.1
 
@@ -21,14 +21,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.7", "3.12"]
+        python-version: ["3.7", "3.14"]
     steps:
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Test with tox
         run: |
@@ -36,5 +36,5 @@ jobs:
           tox -- --cov npx --cov-report xml --cov-report term
 
       - name: Submit to codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v6
         if: ${{ matrix.python-version == '3.9' }}

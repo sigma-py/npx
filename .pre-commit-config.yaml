@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: v0.4.10
+    rev: v0.15.12
     hooks:
       - id: ruff
 
@@ -10,13 +10,13 @@ repos:
       - id: prettier
 
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.3.0
+    rev: v2.4.2
     hooks:
       - id: codespell
         # args: ["-L", "sur,nd"]
 
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.10.0
+    rev: v1.20.2
     hooks:
       - id: mypy
         files: src
