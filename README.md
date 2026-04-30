@@ -7,7 +7,7 @@
 
 <!--[![PyPi downloads](https://img.shields.io/pypi/dm/npx.svg?style=flat-square)](https://pypistats.org/packages/npx)-->
 
-[![gh-actions](https://img.shields.io/github/workflow/status/nschloe/npx/ci?style=flat-square)](https://github.com/nschloe/npx/actions?query=workflow%3Aci)
+[![gh-actions](https://img.shields.io/github/workflow/status/sigma-py/npx/tests.yml?branch=main&style=flat-square)](https://github.com/nschloe/npx/actions?query=workflow%3Aci)
 [![codecov](https://img.shields.io/codecov/c/github/nschloe/npx.svg?style=flat-square)](https://app.codecov.io/gh/nschloe/npx)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=flat-square)](https://github.com/psf/black)
 
