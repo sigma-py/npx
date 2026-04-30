@@ -31,7 +31,7 @@ dependencies = [
 ]
 
 [dependency-groups]
-dev = ["pytest"]
+dev = ["pytest", "pytest-cov"]
 
 [project.urls]
 Code = "https://github.com/sigma-py/npx"
